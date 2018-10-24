@@ -1,0 +1,124 @@
+<div class="template-product">
+  {% section 'announcement-bar' %}
+  {% if settings.back_to_all_url != blank %}
+    {% assign back_to_all = collections[settings.back_to_all_url] %}
+    <div class="product__back-to-all">
+      <a href="{{ back_to_all.url }}">&xlarr; Back to all products.</a>
+    </div>
+  {% endif %}
+  {% section 'product' %}
+  <div class="template-product__product-sections">
+    {% section 'template-product-icon-text-row' %}
+    {% include 'product-single-image-text' %}
+    {% include 'product-highlights' %}
+    {% section 'template-product-images-with-text' %}
+  </div>
+
+  {% comment %} Begin Yopto Review App {% endcomment %}
+  <div class="product__reviews">
+    <h2 class="text__wayfinder wayfinder__level wayfinder__brand-green"><span>Reviews</span></h2>
+    <div class="yotpo yotpo-main-widget" 
+     data-product-id="{{ product.id }}"
+     data-price="{{ variant.price | money_without_currency }}"
+     data-currency="{{ shop.currency }}" 
+     data-name="{{ product.title | escape }}" 
+     data-url="{{ shop.url }}{{ product.url }}" 
+     data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" 
+     data-description="{{ product.description | escape }}"> 
+    </div>
+  </div>
+  {% comment %} End Yopto Reviews App {% endcomment %}
+  <div class="product__next">
+    {% comment %}Get next product{% endcomment %}
+    {% assign current_product = product.id %}
+    {% assign collection = collections.all %} 
+    {% assign i = 0 %}
+    {% for product in collection.products %}
+      {% assign i = i | plus: 1 %}
+      {% if product.id == current_product %} 
+        {% assign next_product_index = i %}
+      {% endif %}
+    {% endfor %}
+    {% if next_product_index == i %}
+      {% assign next_product = collection.products[0] %}
+    {% else %}
+      {% assign next_product = collection.products[next_product_index] %}
+    {% endif %}
+    {% comment %}Custom Fields{% endcomment %}
+    {% assign button_style_selection = product.metafields.custom_fields["next_product_button_style"] %}
+    {% include 'button-style-case' %}
+
+    {% assign next_product_image = product.metafields.custom_fields["next_product_image"] %}
+    {% if next_product_image != blank %}
+      {% assign next_image = next_product_image %}
+    {% else %}
+      {% assign next_image = next_product.images[1] | img_url: 'master' %}
+    {% endif %}
+    <h2 class="text__wayfinder wayfinder__lowered wayfinder__brand-green"><span>Next Product</span></h2>
+    <div class="product__next-product" style="background-image: url({{ next_image }}">
+      <h3>{{ next_product.title }}</h3>
+      <a class="button button__brand-black {{ button_style }}" href="{{ next_product.url }}">Explore</a>
+    </div>
+  </div>
+  
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": "{{ product.title | escape }}",
+  "url": "{{ shop.url }}{{ product.url }}",
+  {% if product.featured_image %}
+    {% assign image_size = product.featured_image.width | append: 'x' %}
+    "image": [
+      "https:{{ product.featured_image.src | img_url: image_size }}"
+    ],
+  {% endif %}
+  "description": "{{ product.description | strip_html | escape }}",
+  {% if current_variant.sku != blank %}
+    "sku": "{{ current_variant.sku }}",
+  {% endif %}
+  "brand": {
+    "@type": "Thing",
+    "name": "{{ product.vendor | escape }}"
+  },
+  {% if product.variants %}
+    "offers": [
+      {% for variant in product.variants %}
+        {
+          "@type" : "Offer",
+          "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+          "price" : "{{ variant.price | divided_by: 100.00 }}",
+          "priceCurrency" : "{{ shop.currency }}",
+          "url" : "{{ shop.url }}{{ variant.url }}",
+          "itemOffered" :
+          {
+              "@type" : "Product",
+              {% if variant.image %}
+                {% assign variant_image_size = variant.image.width | append: 'x' %}
+                "image": "http:{{ variant.image.src | img_url: variant_image_size }}",
+              {% endif %}
+              {% if variant.title != blank %}
+                "name" : "{{ variant.title | escape }}",
+              {% endif %}
+              {% if variant.sku != blank %}
+                "sku": "{{ variant.sku }}",
+              {% endif %}
+              {% if variant.weight != blank %}
+                "weight": {
+                  "@type": "QuantitativeValue",
+                  {% if variant.weight_unit != blank %}
+                    "unitCode": "{{ variant.weight_unit }}",
+                  {% endif %}
+                  "value": "{{ variant.weight | weight_with_unit: variant.weight_unit }}"
+                },
+              {% endif %}
+              "url": "{{ shop.url }}{{ variant.url }}"
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  {% endif %}
+}
+</script>

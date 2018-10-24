@@ -1,0 +1,144 @@
+<!doctype html>
+<!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-K8ZHBK6');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="{{ settings.color_accent }}">
+  <meta name="p:domain_verify" content="713b9c98b3c667c39380f9467e629530"/>
+  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if settings.favicon != blank -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+  {%- endif -%}
+
+  {%- capture seo_title -%}
+    {{ page_title }}
+    {%- if current_tags -%}
+      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+    {%- endif -%}
+    {%- if current_page != 1 -%}
+      &ndash; {{ 'general.meta.page' | t: page: current_page }}
+    {%- endif -%}
+    {%- assign escaped_page_title = page_title | escape -%}
+    {%- unless escaped_page_title contains shop.name -%}
+      &ndash; {{ shop.name }}
+    {%- endunless -%}
+  {%- endcapture -%}
+  <title>{{ seo_title | strip }}</title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {% include 'social-meta-tags' %}
+  {% include 'style-tags', layout: 'theme' %}
+  {% include 'css-variables' %}
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', '');
+
+    window.theme = {
+      strings: {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }}
+      },
+      moneyFormat: {{ shop.money_format | json }}
+    };
+  </script>
+  {% if template contains 'customers' %}
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    {{ "customer_area.js"  | shopify_asset_url | script_tag }}
+  {% endif %}
+  {% comment %} Begin Yopto Reviews App {% endcomment %}
+  <script type="text/javascript">
+  (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/IGg6x6JCG54gfOPPK4k0JECwSWzNuApNS2ags9jx/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+  </script>
+  <script type='text/javascript'>
+  (function (d, t) {
+    var bh = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    bh.type = 'text/javascript';
+    bh.src = 'https://www.bugherd.com/sidebarv2.js?apikey=3reah7q9n5bgmckaatjama';
+    s.parentNode.insertBefore(bh, s);
+    })(document, 'script');
+  </script>
+  {% include 'script-tags', layout: 'theme' %}
+  {% comment %} End Yopto Reviews App {% endcomment %}
+  {{ content_for_header }}
+  <script type="text/javascript">
+      var _ss = _ss || [];
+      _ss.push(['_setDomain', 'https://koi-3QNER5BHXC.marketingautomation.services/net']);
+      _ss.push(['_setAccount', 'KOI-417KD3AJIG']);
+      _ss.push(['_trackPageView']);
+  (function() {
+      var ss = document.createElement('script');
+      ss.type = 'text/javascript'; ss.async = true;
+      ss.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'koi-3QNER5BHXC.marketingautomation.services/client/ss.js?ver=1.1.1';
+      var scr = document.getElementsByTagName('script')[0];
+      scr.parentNode.insertBefore(ss, scr);
+  })();
+  </script>
+  <!--Oohology Tag//-->
+  <script type="text/javascript">
+  //<![CDATA[
+  var DID=257505;
+  </script>
+  <script async src="//stats.sa-as.com/live.js"></script>
+  <!--Oohology Tag//-->
+  {% include 'bold-common' %}
+</head>
+
+{% if template.name == nil and request.path contains '/apps/checkout/' %}
+  <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}app-checkout">
+{% else %}
+  <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+{% endif %}
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8ZHBK6"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  {% if template.name == nil and request.path contains '/apps/checkout/' %}
+  {% else %}
+    {% section 'header' %}
+  {% endif %}
+
+  <main role="main" id="MainContent">
+    {% if template.name == nil and request.path contains '/apps/checkout/' %}
+      <div class="flex-container__row">
+        {{ content_for_layout }}
+        {% include 'checkout-cart' %}
+      </div>
+    {% else %}
+      <div class="container__large">
+        {{ content_for_layout }}
+      </div>
+    {% endif %}
+  </main>
+
+  {% if template.name == nil and request.path contains '/apps/checkout/' %}
+  {% else %}
+    {% section 'footer' %}
+  {% endif %}
+
+  <!-- Bold: CSP Step 1 (theme) -->
+    <script type="text/javascript" charset="utf-8">
+    var shappify_customer_tags ={{ customer.tags|json }}
+    </script>
+  <!-- // end bold code -->
+  <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4878679.js"></script>
+  <!-- End of HubSpot Embed Code -->
+</body>
+</html>

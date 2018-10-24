@@ -1,0 +1,52 @@
+<div class="page-width">
+  <div class="checkout-logo">
+    {% include 'logo-onyx_and_rose' %}
+  </div>
+  <header class="section-header">
+    <h1>{{ 'opp-checkout.payment.header' | t }}</h1>
+  </header>
+  {% if paymentMethodNumber == 0 %}
+    <div class="form-message form-message--error">{{ 'opp-checkout.payment.unavailable' | t }}</div>
+    
+    <div class="action-wrapper">
+      <a class="btn--link cancel-link" href="{{ cancelUrl }}">
+        <svg focusable="false" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4"></path></svg>  
+        <span>{{ 'opp-checkout.payment.cancel' | t }}</span>
+      </a>
+    </div>
+  {% else %}
+    <div id="payment-errors" class="form-message form-message--error hidden"></div>
+    <div class="payment-method-wrapper {% if paymentMethodNumber == 1 %}single-payment-method{% endif %}">
+      <p class="descriptor">{{ 'opp-checkout.payment.descriptor' | t }}</p>
+      {% for paymentMethodId in paymentMethodIds %}
+        <div id="payment-method-container-{{ paymentMethodId }}" class="payment-method-container">
+          <label>
+            <div class="payment-method-radio">
+              <input id="payment-method-{{ paymentMethodId }}" class="payment-method-input" type="radio" value="{{ paymentMethodId }}" name="payment-method" {% if paymentMethodNumber == 1 %}checked="checked"{% endif %} />
+              <svg class="icon-svg btn__spinner" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10c0 5.523-4.477 10-10 10S0 15.523 0 10 4.477 0 10 0v2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8h2z"></path></svg>            
+            </div>
+            <div class="payment-method-label">
+              <span>{{ paymentMethodNames[forloop.index0] }}</span>
+            </div>
+            <div class="payment-method-image">
+              <img src="{{ paymentMethodImages[forloop.index0] }}" />
+            </div>
+          </label>
+          <div id="payment-form-{{ paymentMethodId }}" class="payment-form hidden"></div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="action-wrapper">
+      <a class="btn--link cancel-link" href="{{ cancelUrl }}">
+        <svg focusable="false" aria-hidden="true" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4"></path></svg>  
+        <span>{{ 'opp-checkout.payment.cancel' | t }}</span>
+      </a>
+      <div class="button button_button-color button__form-button">
+        <button class="btn confirm-btn" id="payment-confirm">
+          <span>{{ 'opp-checkout.payment.confirm' | t }}</span>
+        </button>
+      </div>
+    </div>
+  {% endif %}
+</div>

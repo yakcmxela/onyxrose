@@ -1,0 +1,425 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Onyx & Rose",
+    "theme_version": "1.0.0",
+    "theme_author": "Shopify",
+    "theme_documentation_url": "https://github.com/Shopify/starter-theme",
+    "theme_support_url": "https://github.com/Shopify/starter-theme/issues"
+  },
+  {
+    "name": "General",
+    "settings": [
+      {
+        "type": "collection",
+        "id": "back_to_all_url",
+        "label": "Back to all products link"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_main_bg",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "brand_black",
+        "label": "Brand Black",
+        "default": "#272727"
+      },
+      {
+        "type": "color",
+        "id": "brand_white",
+        "label": "Brand White",
+        "default": "#FFF"
+      },
+      {
+        "type": "color",
+        "id": "dark_grey",
+        "label": "Dark Grey",
+        "default": "#272727"
+      },
+      {
+        "type": "color",
+        "id": "mid_grey",
+        "label": "Mid Grey",
+        "default": "#979797"
+      },
+      {
+        "type": "color",
+        "id": "light_grey",
+        "label": "Light Grey",
+        "default": "#f2f2f2"
+      },
+      {
+        "type": "color",
+        "id": "button_color",
+        "label": "Button Color",
+        "default": "#fab177"
+      },
+      {
+        "type": "color",
+        "id": "brand_green",
+        "label": "Brand Green",
+        "default": "#e7eaa2"
+      },
+      {
+        "type": "color",
+        "id": "brand_yellow",
+        "label": "Brand Yellow",
+        "default": "#f4f79f"
+      },
+      {
+        "type": "color",
+        "id": "brand_purple_dark",
+        "label": "Brand Purple (Dark)",
+        "default": "#4e3e59"
+      },
+      {
+        "type": "color",
+        "id": "brand_purple_mid",
+        "label": "Brand Purple (Mid)",
+        "default": "#6f587e"
+      },
+      {
+        "type": "color",
+        "id": "brand_purple_light",
+        "label": "Brand Purple (Light)",
+        "default": "#d3c3dd"
+      },
+      {
+        "type": "color",
+        "id": "brand_pink",
+        "label": "Brand Pink",
+        "default": "#fabacb"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "default": "helvetica_n4",
+        "label": "Heading Text"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "default": "helvetica_n4",
+        "label": "Body text"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_callout",
+        "default": "helvetica_n4",
+        "label": "Callout Text"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social sharing image"
+      },
+      {
+        "type": "image_picker",
+        "id": "share_image",
+        "label": "Image",
+        "info": "Shown when sharing a link on social media. [Learn more](https://help.shopify.com/manual/using-themes/troubleshooting/showing-social-media-thumbnail-images/) about image thumbnails."
+      },
+      {
+        "type": "header",
+        "content": "Social sharing options"
+      },
+      {
+        "type": "checkbox",
+        "id": "social_sharing_blog",
+        "label": "Enable sharing for blog articles",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_facebook",
+        "label": "Share on Facebook",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_twitter",
+        "label": "Tweet on Twitter",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "share_pinterest",
+        "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Sharing links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter link"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook link"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest_link",
+        "label": "Pinterest link"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram link"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat link"
+      },
+      {
+        "type": "text",
+        "id": "social_tumblr_link",
+        "label": "Tumblr link"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": "Youtube link"
+      },
+      {
+        "type": "text",
+        "id": "social_vimeo_link",
+        "label": "Vimeo link"
+      }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_notes_enable",
+        "label": "Enable cart notes",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Collection Settings",
+    "settings": [
+      {
+        "type": "range",
+        "id": "products_per_row",
+        "label": "Product Per Row",
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "default": 3
+      },
+      {
+        "type": "number",
+        "id": "first_collection_promo",
+        "label": "First Promo Position"
+      },
+      {
+        "type": "number",
+        "id": "second_collection_promo",
+        "label": "Second Promo Position"
+      }
+    ]
+  },
+  {
+    "name": "Callout",
+    "settings": [
+      {
+        "type": "text",
+        "id": "callout_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "callout_image",
+        "label": "Image"
+      },
+      {
+        "type": "range",
+        "id": "callout_height",
+        "label": "Vertical Height", 
+        "default": 72,
+        "min": 0,
+        "max": 100
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "button__button-color",
+            "label": "Classic"
+          },
+          {
+            "value": "button__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "button__transparent-white",
+            "label": "Transparent with White Border"
+          },
+          {
+            "value": "button__transparent-black",
+            "label": "Transparent with Black Border"
+          },
+          {
+            "value": "button__white",
+            "label": "White"
+          },
+          {
+            "value": "button__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-mid",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "button__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "button__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "button__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "callout_vertical_alignment",
+        "label": "Vertical Alignment",
+        "options": [
+          {
+            "value": "start",
+            "label": "Start"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "end",
+            "label": "End"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "callout_horizontal_alignment",
+        "label": "Horizontal Alignment",
+        "options": [
+       {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+         ]
+      },
+      {
+        "type": "richtext",
+        "id": "callout_caption",
+        "label": "Caption"
+      },
+      {
+        "type": "text",
+        "id": "callout_button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "select",
+        "id": "callout_text_color",
+        "label": "Text Color",
+        "options": [
+          {
+            "value": "text-color__button-color",
+            "label": "Button Color"
+          },
+          {
+            "value": "text-color__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "text-color__brand-white",
+            "label": "White"
+          },
+          {
+            "value": "text-color__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "text-color__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "text-color__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "text-color__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "text-color__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "url",
+        "id": "callout_button_link",
+        "label": "Button link"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]

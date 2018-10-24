@@ -1,0 +1,30 @@
+.callout {
+	min-height: 400px;
+	h3 {
+		text-transform: initial;
+		font-weight: $font-heading-bold;
+		font-size: 2.8rem;
+		font-family: $font-heading;
+		max-width: 45vw;
+	}
+	@media(max-width: $phablet) {
+		h3 {
+			max-width: none;
+			text-align: center;
+		}
+	}
+}
+
+.callout__container {
+	background-size: cover;
+	background-position: top right;
+	padding: calc(#{$gap} * 2);
+	@media(max-width: $phablet) {
+		padding: $gap;
+		background: $brand-purple-dk;
+	}
+}
+
+.callout__content {
+
+}

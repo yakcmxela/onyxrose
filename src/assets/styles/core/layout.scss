@@ -1,0 +1,49 @@
+html {
+  background-color: $color-body;
+  box-sizing: border-box;
+	font-size: 10px;
+
+	@media(min-width: $fullsize){
+		font-size: #{1000px/$design-width}vw;
+	}		
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	outline: none;
+}
+body {
+	color: $brand-black;
+	font-family: $font-base;
+	font-size: #{$font-size-base/10px}rem;
+	font-weight: $font-body-regular;
+	line-height: $line-height-base;
+	
+	&.nav-ocn.nav-open {
+		overflow: hidden;
+	}
+
+	padding-top: calc(15px + (#{$gap} * 2) + 32px);
+	@media(max-width: 1300px) {
+		padding-top: calc(12px + (#{$gap} * 2) + 32px);
+	}
+	@include media-query($medium-down) {
+		padding-top: $mobile-height;
+	}
+
+	&.template-app-checkout {
+		padding-top: 0px;
+	}
+
+	#MainContent {
+		
+	}
+	&.template-index {
+		//padding-top: 0;
+		#MainContent {
+			margin: 0 auto;
+		}
+	}
+}

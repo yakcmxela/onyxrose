@@ -1,0 +1,493 @@
+<section class="site-header" id="site-header" data-section-id="{{ section.id }}" data-section-type="header" data-user-date="{{ 'now' | date: '%Y-%m-%d %H:%M:%S' }}" data-user-time="{{ 'now' | date: '%H:%M' }}" data-user-city="{{ customer.addresses[0].city }}" data-user-state="{{ customer.addresses[0].province }}" data-user-zip="">
+  {%- if section.settings.announcement_bar_enabled -%}
+    <div>
+      {%- if section.settings.announcement_bar_home_page_only == false or template.name == 'index' -%}
+        {%- if section.settings.announcement_bar_link != blank -%}
+          <a href="{{ section.settings.announcement_bar_link }}">
+            {{ section.settings.announcement_bar_text | escape }}
+          </a>
+        {%- else -%}
+          <p>{{ section.settings.announcement_bar_text | escape }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="site-header__upper">
+    <div class="container__large">
+      {% if section.settings.tagline_svg != blank %}
+        <div class="site-header__tagline-svg">
+          {% include section.settings.tagline_svg %}
+        </div>
+      {% endif %}
+      {% if section.settings.tagline_1 != blank %}
+        <span class="site-header__tagline">{{ section.settings.tagline_1 }}</span>
+      {% endif %}
+      {% if section.settings.tagline_2 != blank %}
+        <span class="font-style__delimiter">|</span>
+        <span class="site-header__tagline-bold">{{ section.settings.tagline_2 }}</span>
+      {% endif %}
+      <div class="site-header__cart-account">
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
+            <span>
+              {% if customer.first_name != blank %}
+                {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+              {% else %}
+                <a href="/account">My Account</a>
+              {% endif %}
+            </span>
+          {% else %}
+            <span>
+              {{ 'layout.customer.log_in' | t | customer_login_link }}
+            </span>
+          {% endif %}
+          <span class="font-style__delimiter">|</span>
+        {% endif %}
+        
+        <div class="site-header__cart">
+          <a href="/cart">
+            {% include 'icon-cart' %}
+            {% if cart.item_count == 0 %}
+              <span>Empty</span>
+            {% elsif cart.item_count == 1 %}
+              <span>{{ cart.item_count }} Item</span>
+            {% else %}
+              <span>{{ cart.item_count }} Items</span>
+            {% endif %}
+          </a>
+          <div class="site-header__cart-contents">
+            {% include 'bold-cart' %}
+            <div class="site-header__cart-items">
+              {% for item in cart.items %}
+                <div class="site-header__cart-item">
+                  {% if item.image != blank %}
+                    <a href="{{ item.url | within: collections.all }}">
+                      {{ item | img_url: '240x240' | img_tag: item.title }}
+                    </a>
+                  {% endif %}
+
+                  <div class="site-header__cart-item-info">
+                    {% for tag in item.product.tags %}
+                      {% if tag == 'Full Spectrum' %}
+                        <span>{{ tag }}</span>
+                      {% endif %}
+                    {% endfor %}
+                    <a class="site-header__cart-item-title" href="{{ item.url }}">{{ item.product.title }}</a>
+                    {% unless item.product.has_only_default_variant %}
+                      <p>{{ item.variant.title }}</p>
+                    {% endunless %}
+                  </div>
+                  <div class="site-header__cart-item-qty">
+                    <span><strong>Qty:</strong>{{ item.quantity }}</span>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            {% if cart.item_count == 0 %}
+              <div class="site-header__cart-empty">
+                <h4>Your Basket is Empty</h4>
+                <a class="button button__button-color" href="/shop">
+                  Continue Shopping
+                </a>
+              </div>
+            {% else %}
+              <div class="site-header__cart-subtotal">
+                <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_total" style="display:none !important;"></span>
+                <span>Subtotal: {{ bold_cart_total_price | money }}</span>
+              </div>
+              <div class="site-header__cart-buttons">
+                <a href="/cart">
+                  {{ 'cart.general.view' | t }}
+                </a>
+                <a href="/checkout">
+                   {{ 'cart.general.check_out' | t }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="site-header__lower">
+    <div class="container__large">
+      <header role="banner">
+        {% capture image_size %}{{ section.settings.logo_max_width }}px{% endcapture %}
+        {% if section.settings.logo_svg != blank %}
+          <a href="/" class="site-header__logo" style="width: {{ image_size }}">
+            {% include section.settings.logo_svg %}
+          </a>
+        {% else %}
+          {% if template.name == 'index' %}
+            <h1>
+          {% else %}
+            <div class="h1">
+          {% endif %}
+              <a href="/" class="site-header__logo">
+                {% if section.settings.logo != blank %}
+                {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+                  <img src="{{ section.settings.logo | img_url: image_size }}"
+                      srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                      alt="{{ section.settings.logo.alt | default: shop.name }}">
+                {% else %}
+                  {{ shop.name }}
+                {% endif %}
+              </a>
+          {% if template.name == 'index' %}
+            </h1>
+          {% else %}
+            </div>
+          {% endif %}
+        {% endif %}
+
+      </header>
+
+      <nav role="navigation" id="primary-nav">
+        <ul>
+          {% comment %}{% for link in linklists[section.settings.menu].links %}
+            {%- assign wayfinder_active = 'inactive' -%}
+            {%- assign wayfinder_selection = link.object.metafields.custom_fields["color_wayfinding_gen"] -%}
+            {% if wayfinder_selection == blank and link.object.products != blank %}
+              {% assign wayfinder_selection = 'Green' %}
+            {% elsif wayfinder_selection == blank and link.object.articles != blank %}
+              {% assign wayfinder_selection = 'Grey Mid' %}
+            {% endif %}
+            {% include 'color-wayfinder-case' %}
+            {% if page.url == link.url or collection.url == link.url or blog.url == link.url %}
+              {% assign wayfinder_active = 'active' %}
+            {% endif %}
+            {% for childlink in link.links %}
+              {% if page.url == childlink.url %}
+                {% assign wayfinder_active = 'active' %}
+              {% endif %}
+            {% endfor %}
+            {% if link.links != blank %}
+              <li class="{{ wayfinder }} {{ wayfinder_active }}">
+                <a href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+                <div class="site-header__submenu-container">
+                  <ul class="site-header__submenu">
+                    {% for childlink in link.links %}
+                      <li>
+                        <a href="{{ childlink.url }}">
+                          {{ childlink.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+            {% else %}
+              <li class="{{ wayfinder }} {{ wayfinder_active }}">
+                <a href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}{% endcomment %}
+          {% for link in linklists[section.settings.menu].links %}
+            {%- assign wayfinder_active = 'inactive' -%}
+            {%- assign wayfinder_selection = link.object.metafields.custom_fields["color_wayfinding_gen"] -%}
+            {% if wayfinder_selection == blank and link.object.products != blank %}
+              {% assign wayfinder_selection = 'Green' %}
+            {% elsif wayfinder_selection == blank and link.object.articles != blank %}
+              {% assign wayfinder_selection = 'Grey Mid' %}
+            {% endif %}
+            {% include 'color-wayfinder-case' %}
+            {% if page.url == link.url or collection.url == link.url or blog.url == link.url %}
+              {% assign wayfinder_active = 'active' %}
+            {% endif %}
+            {% for childlink in link.links %}
+              {% if page.url == childlink.url %}
+                {% assign wayfinder_active = 'active' %}
+              {% endif %}
+            {% endfor %}
+            {% if link.links != blank %}
+              <li class="{{ wayfinder }} {{ wayfinder_active }}">
+                <a href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {% else %}
+              <li>
+                <a  class="{{ wayfinder }} {{ wayfinder_active }}" href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div id="nav-toggle">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+</section>
+
+<section class="site-header__submenu">
+  <div class="container__large">
+      <nav role="navigation" id="sub-nav">
+        {% assign i = 0 %}
+        {% assign is_mainpage = false %}
+        {% assign is_subpage = false %}
+        {% for link in linklists[section.settings.menu].links %}
+          {% assign i = i | plus: 1 %}
+          {% if link.url == page.url %}
+            {% assign is_mainpage = true %}
+            {% assign sublinks = i %}
+          {% else %}
+            {% for childlink in link.links %}
+              {% if page.url == childlink.url %}
+                {% assign sublinks = i %}
+                {% assign is_subpage = true %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        {% if is_subpage == true or is_mainpage == true %}
+          {% assign i = 0 %}
+          {% for link in linklists[section.settings.menu].links %}
+            {% assign i = i | plus: 1 %}
+            {% if i == sublinks %}
+            {% assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] %}
+            {% include 'color-wayfinder-header' %}
+              <ul class="{{ wayfinder }}">
+                {% for childlink in link.links %}
+                  {% if childlink.url == page.url %}
+                    {% assign class = 'active' %}
+                  {% else %}
+                    {% assign class = 'inactive' %}
+                  {% endif %}
+                  <li class="{{ class }}">
+                    <a href="{{ childlink.url }}">
+                      {{ childlink.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </nav>
+    </div>
+</section>
+
+<div id="ocn" class="ocn">
+  <header role="banner">
+    {% if template.name == 'index' %}
+      <h1>
+    {% else %}
+      <div class="h1">
+    {% endif %}
+        <a href="/" class="ocn__logo">
+          {% if section.settings.logo != blank %}
+            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+            <img src="{{ section.settings.logo | img_url: image_size }}"
+                srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                alt="{{ section.settings.logo.alt | default: shop.name }}">
+          {% else %}
+            {{ shop.name }}
+          {% endif %}
+        </a>
+    {% if template.name == 'index' %}
+      </h1>
+    {% else %}
+      </div>
+    {% endif %}
+  </header>
+  <div class="ocn__container">
+    <nav role="navigation">
+      <ul class="ocn__menu">
+        {% for link in linklists[section.settings.menu].links %}
+          {% if link.links != blank %}
+            <li>
+              <a href="{{ link.url }}">
+                {{ link.title }}
+              </a>
+              <div class="shop__icon-plus"></div>
+              <div class="site-header__submenu-container">
+                <ul class="site-header__submenu">
+                  {% for childlink in link.links %}
+                    <li>
+                      <a href="{{ childlink.url }}">
+                        {{ childlink.title }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ link.url }}">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <li>
+                {% if customer.first_name != blank %}
+                  {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                  {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
+                {% else %}
+                  <a href="/account">My Account</a>
+                {% endif %}
+              </li>
+            {% else %}
+              <li>
+                {{ 'layout.customer.log_in' | t | customer_login_link }}
+              </li>
+            {% endif %}
+        {% endif %}
+        <li class="ocn__cart">
+          <a href="/cart">
+            {% include 'icon-cart' %}
+            {% if cart.item_count == 0 %}
+              <span>Empty</span>
+            {% elsif cart.item_count == 1 %}
+              <span>{{ cart.item_count }} Item</span>
+            {% else %}
+              <span>{{ cart.item_count }} Items</span>
+            {% endif %}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+{% if section.settings.logo != blank %}
+  <style>
+    .logo-image {
+      display: block;
+      max-width: {{ section.settings.logo_max_width }}px;
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_enabled",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_bar_home_page_only",
+        "label": "Show on home page only",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "announcement_bar_text",
+        "label": "Announcement text",
+        "default": "Announce something here"
+      },
+      {
+        "type": "url",
+        "id": "announcement_bar_link",
+        "label": "Announcement link",
+        "info": "Optional"
+      },
+      {
+        "type": "text",
+        "id": "tagline_svg",
+        "label": "Tagline SVG",
+        "info": "Enter filename without extension. For example: icon-icon_name"
+      },
+      {
+        "type": "text",
+        "id": "tagline_1",
+        "label": "Tagline Line 1"
+      },
+      {
+        "type": "text",
+        "id": "tagline_2",
+        "label": "Tagline Line 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "text",
+        "id": "logo_svg",
+        "label": "Logo SVG",
+        "info": "Enter filename without extension. Will override images."
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 10,
+        "unit": "px",
+        "label": "Custom logo width",
+        "default": 250
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "default": "main-menu"
+      }
+    ]
+  }
+{% endschema %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "{{ shop.name }}",
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+  {% endif %}
+  "sameAs": [
+    "{{ settings.social_twitter_link }}",
+    "{{ settings.social_facebook_link }}",
+    "{{ settings.social_pinterest_link }}",
+    "{{ settings.social_instagram_link }}",
+    "{{ settings.social_tumblr_link }}",
+    "{{ settings.social_snapchat_link }}",
+    "{{ settings.social_youtube_link }}",
+    "{{ settings.social_vimeo_link }}"
+  ],
+  "url": "{{ shop.url }}{{ page.url }}"
+}
+</script>
+
+{% if template.name == 'index' %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "{{ shop.name }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ shop.url }}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+  </script>
+{% endif %}

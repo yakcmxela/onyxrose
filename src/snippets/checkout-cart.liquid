@@ -1,0 +1,26 @@
+<section class="checkout-cart">
+	{% include 'bold-cart' %}
+	<div class="checkout-cart__items">
+	  {% for item in cart.items %}
+	    {% include 'bold-cart-item' with item %}
+				<div class="checkout-cart__item">
+					{% if item.image != blank %}
+						<div class="checkout-cart__product-thumbnail" data-quantity="{{ item.quantity }}">
+		        	{{ item | img_url: '64x64' | img_tag: item.title }}
+		      	</div>
+	      {% endif %}
+	      <p class="checkout-cart__item-title">{{ item.product.title }}</p>
+	      {% if item.original_line_price != item.line_price %}
+	        <span class="visually-hidden">{{ 'cart.label.discounted_price' | t }}</span>
+	        <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_price" style="display:none !important;"></span>
+	        <p>{{ item.bold_item_price | money }}</p>
+	        <span class="visually-hidden">{{ 'cart.label.original_price' | t }}</span>
+	        <s>{{ item.original_price | money }}</s>
+	      {% else %}
+	        <span class="Bold-theme-hook-DO-NOT-DELETE bold_cart_item_price" style="display:none !important;"></span>
+	        <p>{{ bold_item_price | money }}</p>
+	      {% endif %}
+	    </div>
+	  {% endfor %}
+	</div>
+</section>

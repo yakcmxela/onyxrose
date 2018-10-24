@@ -1,0 +1,196 @@
+<section class="hero {{ section.settings.text_color }} hero__earn" style="background-image: url({{ section.settings.hero_image | img_url: 'master' }}); height: {{ section.settings.height }}vh;" data-section-type="hero" data-section-id="{{ section.id }}">
+  <div class="hero__content flex-container flex-container__{{ section.settings.vertical_alignment }}--{{ section.settings.horizontal_alignment }}">
+    <h1 class="hero__heading">
+      {% assign heading = section.settings.heading | replace: '<p>', '<span>' | replace: '</p>', '</span>' %}
+      {% if heading != blank %}
+        {{ heading  }}
+      {% else %}
+        {{ page.title }}
+      {% endif %}
+    </h1>
+    {% if section.settings.caption != blank %}
+      <div class="hero__caption">
+        <p>{{ section.settings.caption }}</p>
+      </div>
+    {% endif %}
+    {% assign page = pages[section.settings.button_link] %}
+    {% if section.settings.button_text %}
+      {%- assign button_text = section.settings.button_text %}
+    {% else %}
+      {%- assign button_text = page.title -%}
+    {% endif %}
+    <a class="hero__link button {{ section.settings.button_style }} button__intent" href="{{ page.url }}?st_intent=st:core:home" title="{{ page.title }}">{{ button_text }}</a>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "caption",
+        "label": "Caption"
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "label": "Text Color",
+        "options": [
+          {
+            "value": "text-color__button-color",
+            "label": "Button Color"
+          },
+          {
+            "value": "text-color__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "text-color__brand-white",
+            "label": "White"
+          },
+          {
+            "value": "text-color__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "text-color__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "text-color__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "text-color__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "text-color__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "text-color__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "button__button-color",
+            "label": "Classic"
+          },
+          {
+            "value": "button__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "button__transparent-white",
+            "label": "Transparent with White Border"
+          },
+          {
+            "value": "button__transparent-black",
+            "label": "Transparent with Black Border"
+          },
+          {
+            "value": "button__white",
+            "label": "White"
+          },
+          {
+            "value": "button__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "button__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "button__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "button__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "button__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Image"
+      },
+      {
+      	"type": "range",
+      	"id": "height",
+      	"label": "Vertical Height",
+      	"default": 72,
+      	"min": 0,
+      	"max": 100
+      },
+      {
+        "type": "select",
+        "id": "vertical_alignment",
+        "label": "Vertical Alignment",
+        "options": [
+          {
+            "value": "start",
+            "label": "Start"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "end",
+            "label": "End"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "horizontal_alignment",
+        "label": "Horizontal Alignment",
+        "options": [
+	     {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+	       ]
+      }
+    ]
+  }
+{% endschema %}

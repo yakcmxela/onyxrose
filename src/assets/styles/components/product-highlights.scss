@@ -1,0 +1,286 @@
+.product-highlights {
+	width: calc(100% + (#{$gap} * 2));
+	transform: translateX(-#{$gap});
+	overflow: hidden;
+	@include media-query($medium-down) {
+		width: calc(100% + (#{$half-gap} * 2));
+		transform: translateX(-#{$half-gap});
+	}
+	h2 {
+		margin-bottom: $gap;
+	}
+	h3 {
+		text-transform: uppercase;
+		letter-spacing: 6px;
+		font-weight: 700;
+		margin-bottom: $gap;
+	}
+	p {
+		font-family: $font-heading;
+		text-transform: uppercase;
+		letter-spacing: 1.4px;
+		font-size: 1.6rem;
+		line-height: 1.7;
+		font-weight: $font-heading-semibold;
+	}
+	img {
+		max-height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-57.5%, -50%);
+    z-index: 0;
+		@include media-query($medium-down) {
+			padding: 0;
+			left: 20%;
+		}
+		@media(max-width: 600px) {
+			left: 50%;
+			transform: translate(-57.5%, -40%);
+		}
+	}
+	.shop__icon-plus {
+		border: 0px;
+		display: none;
+	}
+	.background-color__button-color {
+		h3 {
+			color: $brand-green;
+		}
+		p {
+			color: $brand-white;
+		}
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-green;
+			}
+		}
+	}
+	.background-color__brand-black {
+		color: $brand-white;
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-white;
+			}
+		}
+	}
+	.background-color__brand-white {
+		color: $brand-black;
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-black;
+			}
+		}
+	}
+	.background-color__brand-purple-dark {
+		h3 {
+			color: $brand-purple-lt;
+		}
+		p {
+			color: $brand-white;
+		}
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-purple-lt;
+			}
+		}
+	}
+	.background-color__brand-purple-mid {
+		color: $brand-purple-lt;
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-purple-lt;
+			}
+		}
+	}
+	.background-color__brand-purple-light {
+		color: $brand-purple-dk;
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-purple-dk;
+			}
+		}
+	}
+	.background-color__brand-green {
+		h3 {
+			color: $brand-purple-dk;
+		}
+		p {
+			color: $brand-black;
+		}
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-purple-dk;
+			}
+		}
+	}
+	.background-color__brand-pink {
+		h3 {
+			color: $brand-purple-dk;
+		}
+		p {
+			color: $brand-white;
+		}
+		.shop__icon-plus {
+			&:after,
+			&:before {
+				background-color: $brand-purple-dk;
+			}
+		}
+	}
+}
+
+.product-highlights__container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	padding: $gap 0;
+	@include media-query($medium-down) {
+		flex-direction: column;
+		align-items: flex-end;
+	}
+	@media(max-width: 600px) {
+		padding: $quarter-gap 0;
+	}
+}
+
+.product-highlights__highlight {
+	text-align: right;
+	margin-right: 7.5%;
+	margin-left: 0;
+	width: 50%;
+	max-width: 33vw;
+	.shop__icon-plus {
+		margin: 0 0 0 auto;
+	}
+	&:last-child {
+		text-align: left;
+		margin-left: 7.5%;
+		margin-right: 0;
+		.shop__icon-plus {
+			margin: 0 auto 0 0;
+		}
+	}
+}
+
+.product-highlights__highlights {
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	@include media-query($medium-down) {
+		width: 100%;
+		max-width: 45vw;
+		flex-direction: column;
+		h3 {
+			margin-bottom: $half-gap;
+		}
+		&:first-child,
+		&:last-child {
+			margin-right: 7.5%;
+			margin-left: 0;
+			.product-highlights__highlight {
+				width: 100%;
+				padding: $quarter-gap 0;
+				&:last-child,
+				&:first-child {
+					text-align: left;
+					margin-left: 7.5%;
+					.shop__icon-plus {
+						margin-right: auto;
+						margin-left: 0;
+					}
+				}
+			}
+		}
+	}
+	@media(max-width: 600px) {
+		flex-direction: column;
+		padding: $half-gap 0;
+		&:first-child,
+		&:last-child {
+			margin: 0;
+			max-width: 100%;
+			.product-highlights__highlight {
+				&:first-child,
+				&:last-child {
+					max-width: none;
+					margin: 0;
+					width: 100%;
+					text-align: center;
+					padding: $half-gap;
+					.shop__icon-plus {
+						margin: auto;
+					}
+				}
+			}
+		}
+		&:first-child {
+			margin-bottom: 286px;
+		}
+	}
+}
+
+.product-highlights__highlight {
+	padding: $gap;
+	@include media-query($medium-down) {
+		width: 50%;
+		padding: $gap $half-gap;
+		br {
+			display: none;
+		}
+	}
+}
+
+.cbd-oil {
+	img {
+		@media(max-width: 600px) {
+			height: 500px;
+			max-width: none;
+			transform: translate(-57.5%, -36%);
+		}
+	}
+}
+
+.cbd-capsules {
+	img {
+		transform: translate(-56.5%,-50%);
+		@media (max-width: 600px) {
+			height: 650px;
+			max-width: none;
+			transform: translate(-57.5%, -50%);
+		}
+	}
+}
+
+.cbd-balm {
+	img {
+		max-width: none;
+		transform: translate(-51.5%, -50%);
+		@media (max-width: 600px) {
+			transform: translate(-51.5%, -50%);
+		}
+	}
+}
+
+.cbd-dog-treats {
+	img {
+		transform: translate(-52.5%,-50%);
+		@media (max-width: 500px) {
+			height: 700px;
+			max-width: none;
+			transform: translate(-52.5%,-44%);
+		}
+	}
+}

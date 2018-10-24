@@ -1,0 +1,149 @@
+<section data-section-type="rewards-tabs" data-section-id="{{ section.id }}" class="rewards-tabs">
+	{% if section.settings.heading %}
+		{% assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] %}
+    {% include 'color-wayfinder-case' %}
+    <h2 class="wayfinder__raised {{ wayfinder }}"><span>{{ section.settings.heading }}</span></h2>
+	{% endif %}
+	<div class="rewards-tabs__header">
+		{% assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] %}
+    {% include 'color-wayfinder-case' %}
+    {%- if section.settings.tab_1 != blank -%}
+      <h2 class="wayfinder__level {{ wayfinder }} tab-1 active" data-tab="1"><span>{{ section.settings.tab_1 }}</span></h2>
+    {%- endif -%}
+    {% assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] %}
+    {% include 'color-wayfinder-case' %}
+    {%- if section.settings.tab_2 != blank -%}
+      <h2 class="wayfinder__level {{ wayfinder }} tab-2" data-tab="2"><span>{{ section.settings.tab_2 }}</span></h2>
+    {%- endif -%}
+	</div>
+	<div class="rewards-tabs__grid-container">
+		<div class="grid-columns-3 rewards-tabs__grid rewards-tabs__grid-tab-1 active" data-tab="1">
+			{% for block in section.blocks %}
+				<div class="grid-columns__item">
+					{% if block.type == 'tab_1' %}
+						<div class="rewards-tabs__item tab-1__item">
+							{% if block.settings.icon != blank %}
+								<div class="rewards-tabs__icon">
+									<img src="{{ block.settings.icon | img_url: 'master ' }}">
+								</div>
+							{% endif %}
+							<div class="rewards-tabs__value tab-1__value">
+								{% if block.settings.points_value != blank %}
+									<span>{{ block.settings.points_value }}</span>
+								{% endif %}
+							</div>
+							{% if block.settings.caption != blank %}
+								<h4>{{ block.settings.caption }}</h4>
+							{% endif %}
+							{% if block.settings.points_caption != blank %}
+								<p>{{ block.settings.points_caption }}</p>
+							{% endif %}
+						</div> 
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+		<div class="grid-columns-3 rewards-tabs__grid rewards-tabs__grid-tab-2" data-tab="2">
+			{% for block in section.blocks %}
+				{% if block.type == 'tab_2' %}
+					<div class="grid-columns__item">
+						<div class="rewards-tabs__item tab-2__item">
+							{% if block.settings.icon != blank %}
+								<div class="rewards-tabs__icon">
+									<img src="{{ block.settings.icon | img_url: 'master' }}">
+								</div>
+							{% endif %}
+							<div class="rewards-tabs__value tab-1__value">
+								{% if block.settings.points_value != blank %}
+									<span>{{ block.settings.points_value }}</span>
+								{% endif %}
+							</div>
+							{% if block.settings.caption != blank %}
+								<h4>{{ block.settings.caption }}</h4>
+							{% endif %}
+							{% if block.settings.points_caption != blank %}
+								<p>{{ block.settings.points_caption }}</p>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% schema %}
+	{
+		"name": "Rewards Tabs",
+		"settings": [
+			{
+				"type": "text",
+				"id": "heading",
+				"label": "Section Heading"
+			},
+			{
+				"type": "text",
+				"id": "tab_1",
+				"label": "First Tab Heading"
+			},
+			{
+				"type": "text",
+				"id": "tab_2",
+				"label": "Second Tab Heading"
+			}
+		],
+		"blocks": [
+			{
+				"type": "tab_1",
+				"name": "First Tab Item",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "icon",
+						"label": "Icon"
+					},
+					{
+						"type": "text",
+						"id": "caption",
+						"label": "Caption"
+					},
+					{
+						"type": "text",
+						"id": "points_value",
+						"label": "Point Value"
+					},
+					{
+						"type": "text",
+						"id": "points_caption",
+						"label": "Points Caption"
+					}
+				]
+			},
+			{
+				"type": "tab_2",
+				"name": "Second Tab Item",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "icon",
+						"label": "Icon"
+					},
+					{
+						"type": "text",
+						"id": "caption",
+						"label": "Caption"
+					},
+					{
+						"type": "text",
+						"id": "points_value",
+						"label": "Point Value"
+					},
+					{
+						"type": "text",
+						"id": "points_caption",
+						"label": "Points Caption"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

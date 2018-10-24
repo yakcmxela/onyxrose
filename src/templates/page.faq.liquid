@@ -1,0 +1,14 @@
+<div class="container">
+	{%- assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] -%}
+  {% include 'color-wayfinder-case' %}
+	<h1 class="wayfinder__level {{ wayfinder }}"><span>{{ page.title }}</span></h1>
+	<div class="rte">
+	  {{ page.content }}
+	</div>
+	{% section 'template-faq-list-dropdowns_1' %}
+	{% section 'template-faq-list-dropdowns_2' %}
+	{% section 'template-faq-list-dropdowns_3' %}
+	{% section 'template-faq-list-dropdowns_4' %}
+	{% section 'template-faq-list-dropdowns_5' %}
+</div>
+{% section 'callout' %}

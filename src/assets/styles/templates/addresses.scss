@@ -1,0 +1,119 @@
+.template-addresses {
+    .container {
+        padding-bottom: $gap;
+    }
+    h1,h2 {
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        margin: $half-gap 0;
+    }
+    .customer__return {
+        margin-top: $half-gap;
+    }
+}
+
+#AddressNewForm {
+    transition: all .5s linear;
+    max-height: 100%;
+    overflow: hidden;
+    opacity: 1;
+    height: auto;
+    form {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    h2 {
+        width: 100%;
+    }
+    label {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+    }
+    input,
+    select {
+        width: calc(50% - (#{$quarter-gap} / 2));
+        margin-bottom: $quarter-gap;
+    }
+    input[type='checkbox'] {
+        width: 3%;
+    }
+    select {
+        box-sizing: border-box;
+        height: 42px;
+    }
+    .label_checkbox {
+        width: 97%;
+    }
+    .button {
+        width: auto;
+        margin-bottom: $gap;
+        input {
+            background-color: transparent;
+        }
+        &:hover {
+            input {
+                background-color: transparent;
+            }
+        }
+    }
+    .form__is-default {
+        width: calc(50% - (#{$quarter-gap} / 2));
+        display: flex;
+        align-items: center;
+        label {
+            margin-left: 1rem;
+            text-transform: uppercase;
+            font-size: 1.25rem;
+            color: $brand-black;
+            position: static;
+            opacity: 1;
+        }
+        input {
+            width: auto;
+            margin: 0;
+        }
+    }
+    @include media-query($small) {
+        input,
+        select,
+        .form__is-default {
+            width: 100%;
+        }
+        .button {
+            margin-top: 2.5rem;
+        }
+        #AddressProvinceContainerNew {
+            width: 100%;
+        }
+    }
+}
+.customer__addresses {
+    display: flex;
+    flex-wrap: wrap;
+}
+.customer__address {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .customer__address-buttons {
+        margin-top: auto;
+        .button {
+            margin-top: $quarter-gap;
+        }
+    }
+}
+.hide {
+    #AddressNewForm {
+        max-height: 0px;
+        opacity: 0;
+    }
+}
+#AddressProvinceContainerNew {
+    width: calc(50% - (#{$quarter-gap} / 2));
+    select {
+        width: 100%;
+    }
+}

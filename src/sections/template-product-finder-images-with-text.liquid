@@ -1,0 +1,440 @@
+{% for block in section.blocks %}
+  {% if block.type == 'double_image_text' %}
+    <section class="double-image-text {{ block.settings.row_direction }} {{ block.settings.background_size }}" data-section-type="double-image-text">
+      <div class="double-image-text__images">
+        <div class="double-image-text__image">
+          {% if block.settings.image_1 != blank %}
+            <img src="{{ block.settings.image_1 | img_url: 'master' }}">
+          {% endif %}
+        </div>
+        <div class="double-image-text__image">
+          {% if block.settings.image_2 != blank %}
+            <img src="{{ block.settings.image_2 | img_url: 'master' }}">
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="double-image-text__text">
+        <div class="flex-container flex-container__{{ block.settings.vertical_alignment }}--{{ block.settings.horizontal_alignment }}">
+          {% if block.settings.heading != blank %}
+            <h2><span>{{ block.settings.heading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</span></h2>
+          {% endif %}
+          {% if block.settings.subheading != blank %}
+            <h3>{{ block.settings.subheading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</h3>
+          {% endif %}
+          {% if block.settings.caption != blank %}
+            {{ block.settings.caption }}
+          {% endif %}
+          {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+            <a class="button {{ block.settings.button_style }}" href="{{ block.settings.button_link }}">
+              {{ block.settings.button_text | escape }}
+            </a>
+          {% endif %}
+          {% if block.settings.accent_image != blank %}
+            <div class="double-image-text__accent-image">
+              <img src="{{ block.settings.accent_image | img_url: '300x' }}">
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% elsif block.type == 'single_image_text' %}
+    <section class="single-image-text {{ block.settings.row_direction }}" data-section-type="single-image-text">
+      <div class="single-image-text__content flex-container flex-container__{{ block.settings.vertical_alignment }}--{{ block.settings.horizontal_alignment }}">
+        {% if block.settings.icon_image != blank %}
+          <img src="{{ block.settings.icon_image | img_url: '150x' }}">
+        {% endif %}
+        {% if block.settings.heading != blank %}
+          <h2><span>{{ block.settings.heading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</span></h2>
+        {% endif %} 
+        {% if block.settings.subheading != blank %}
+          <h3>{{ block.settings.subheading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</h3>
+        {% endif %}
+        {% if block.settings.caption != blank %}
+          {{ block.settings.caption }}
+        {% endif %}
+        {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+          <a class="button {{ block.settings.button_style }}" href="{{ block.settings.button_link }}">
+            {{ block.settings.button_text | escape }}
+          </a>
+        {% endif %}
+        {% if block.settings.accent_image != blank %}
+          <div class="single-image-text__accent-image" >
+            <img src="{{ block.settings.accent_image | img_url: '300x' }}">
+          </div>
+        {% endif %}
+      </div>
+      <div class="single-image-text__image">
+        {% if block.settings.large_image %}
+          <img src="{{ block.settings.large_image | img_url: 'x400' }}">
+        {% endif %}
+      </div>
+    </section>      
+  {% elsif block.type == 'rte' %}
+    <section>
+      <div class="rte rte__small">
+        {% assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] %}
+        {% include 'color-wayfinder-case' %}
+        {%- if section.settings.title != blank -%}
+          <h2>{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if block.settings.subheading != blank -%}
+          <h3>{{ block.settings.subheading | escape }}</h3>
+        {%- endif -%}
+        {%- if block.settings.text != blank -%}
+            {{ block.settings.text }}
+        {%- endif -%}
+       </div>
+    </section>
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Images with text & RTE",
+    "blocks": [
+      {
+        "type": "double_image_text",
+        "name": "Two Images with text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "Image 1"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "Image 2"
+          },
+          {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "subheading",
+            "label": "Subheading"
+          },
+          {
+            "type": "richtext",
+            "id": "caption",
+            "label": "Caption"
+          },
+          {
+            "type": "select",
+            "id": "vertical_alignment",
+            "label": "Vertical Alignment",
+            "default": "center",
+            "options": [
+              {
+                "value": "start",
+                "label": "Start"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "end",
+                "label": "End"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "horizontal_alignment",
+            "label": "Horizontal Alignment",
+            "options": [
+           {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+             ]
+          },
+          {
+            "type": "select",
+            "id": "row_direction",
+            "label": "Row Direction",
+            "options": [
+              {
+                "value": "row",
+                "label": "Normal"
+              },
+              {
+                "value": "row-reverse",
+                "label": "Reverse"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "background_size",
+            "label": "Background Size",
+            "options": [
+              {
+                "value": "double-image-text__partial-bg",
+                "label": "Partial"
+              },
+              {
+                "value": "double-image-text__full-bg",
+                "label": "Full"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image",
+            "label": "Accent Image",
+            "info": "Image to appear below text area"
+          },
+          {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "options": [
+              {
+                "value": "button__button-color",
+                "label": "Classic"
+              },
+              {
+                "value": "button__brand-black",
+                "label": "Black"
+              },
+              {
+                "value": "button__transparent-white",
+                "label": "Transparent with White Border"
+              },
+              {
+                "value": "button__transparent-black",
+                "label": "Transparent with Black Border"
+              },
+              {
+                "value": "button__white",
+                "label": "White"
+              },
+              {
+                "value": "button__brand-purple-dark",
+                "label": "Purple Dark"
+              },
+              {
+                "value": "button__brand-purple-mid",
+                "label": "Purple Mid"
+              },
+              {
+                "value": "button__brand-purple-light",
+                "label": "Purple Light"
+              },
+              {
+                "value": "button__brand-green",
+                "label": "Green"
+              },
+              {
+                "value": "button__brand-yellow",
+                "label": "Yellow"
+              },
+              {
+                "value": "button__brand-pink",
+                "label": "Pink"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "single_image_text",
+        "name": "Single Image with Text",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "large_image",
+            "label": "Large Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "accent_image",
+            "label": "Accent Image",
+            "info": "Image to appear below text area"
+          },
+          {
+            "type": "image_picker",
+            "id": "icon_image",
+            "label": "Icon Image"
+          },
+          {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "subheading",
+            "label": "Subheading"
+          },
+          {
+            "type": "richtext",
+            "id": "caption",
+            "label": "Caption"
+          },
+          {
+            "type": "select",
+            "id": "vertical_alignment",
+            "label": "Vertical Alignment",
+            "options": [
+              {
+                "value": "start",
+                "label": "Start"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "end",
+                "label": "End"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "horizontal_alignment",
+            "label": "Horizontal Alignment",
+            "options": [
+           {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+             ]
+          },
+          {
+            "type": "select",
+            "id": "row_direction",
+            "label": "Row Direction",
+            "options": [
+              {
+                "value": "row",
+                "label": "Normal"
+              },
+              {
+                "value": "row-reverse",
+                "label": "Reverse"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "options": [
+              {
+                "value": "button__button-color",
+                "label": "Classic"
+              },
+              {
+                "value": "button__brand-black",
+                "label": "Black"
+              },
+              {
+                "value": "button__transparent-white",
+                "label": "Transparent with White Border"
+              },
+              {
+                "value": "button__transparent-black",
+                "label": "Transparent with Black Border"
+              },
+              {
+                "value": "button__white",
+                "label": "White"
+              },
+              {
+                "value": "button__brand-purple-dark",
+                "label": "Purple Dark"
+              },
+              {
+                "value": "button__brand-purple-mid",
+                "label": "Purple Mid"
+              },
+              {
+                "value": "button__brand-purple-light",
+                "label": "Purple Light"
+              },
+              {
+                "value": "button__brand-green",
+                "label": "Green"
+              },
+              {
+                "value": "button__brand-yellow",
+                "label": "Yellow"
+              },
+              {
+                "value": "button__brand-pink",
+                "label": "Pink"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "rte",
+        "name": "Rich Text with Heading",
+        "settings": [
+          { 
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Talk about your brand"
+          },
+          {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "Subheading text"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

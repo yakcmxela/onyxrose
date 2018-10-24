@@ -1,0 +1,20 @@
+.full-image-text {
+	padding: calc(#{$gap} * 4);
+	width: calc(100% + (#{$gap} * 2));
+	transform: translateX(-#{$gap});
+	background-size: cover;
+	background-position: center center;
+	text-align: center;
+	h2 {
+		font-size: 3rem;
+		max-width: 100%;
+		margin: auto;
+	}
+	@include media-query($medium-down) {
+		width: calc(100% + (#{$half-gap} * 2));
+		transform: translateX(-#{$half-gap});
+	}
+	@media(max-width: $phablet) {
+		padding: calc(#{$gap} * 4) $gap;
+	}
+}

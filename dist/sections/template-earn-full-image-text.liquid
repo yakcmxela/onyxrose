@@ -1,0 +1,63 @@
+<section data-section-type="full-image-text" data-section-id="{{ section.id }}" class="full-image-text {{ section.settings.text_color }}" style="background-image: url({{ section.settings.image | img_url: 'master' }});">
+	<h2>{{ section.settings.caption | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</h2>
+</section>
+{% schema %}
+	{
+		"name": "Full Image Text",
+		"settings": [
+			{
+				"type": "image_picker",
+				"id": "image",
+				"label": "Image"
+			},
+			{
+				"type": "richtext",
+				"id": "caption",
+				"label": "Caption"
+			},
+			{
+        "type": "select",
+        "id": "text_color",
+        "label": "Text Color",
+        "options": [
+          {
+            "value": "text-color__button-color",
+            "label": "Button Color"
+          },
+          {
+            "value": "text-color__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "text-color__brand-white",
+            "label": "White"
+          },
+          {
+            "value": "text-color__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "text-color__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "text-color__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "text-color__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "text-color__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "text-color__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      }
+		]
+	}
+{% endschema %}

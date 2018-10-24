@@ -1,0 +1,28 @@
+{% case wayfinder_selection %}
+  {% when 'Button Color' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__button-color' %}
+  {% when 'Black' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-black' %}
+  {% when 'White' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__white' %}
+  {% when 'Purple Dark' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-purple-dark' %}
+  {% when 'Purple Mid' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-purple-mid' %}
+  {% when 'Purple Light' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-purple-light' %}
+  {% when 'Green' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-green' %}
+  {% when 'Yellow' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-yellow' %}
+  {% when 'Pink' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-pink' %}
+  {% when 'Grey Dark' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-grey-dark' %}
+  {% when 'Grey Mid' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-grey-mid' %}
+  {% when 'Grey Light' %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__brand-grey-light' %}
+  {% else %}
+    {% assign wayfinder = 'text__wayfinder wayfinder__button-color' %}
+{% endcase %}

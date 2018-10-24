@@ -1,0 +1,378 @@
+<section class="hero" style="height: {{ section.settings.height }}vh;" data-section-type="hero" data-section-id="{{ section.id }}">
+  <div class="hero__image hero__image-day {{ section.settings.text_color }} hero__content flex-container flex-container__{{ section.settings.vertical_alignment }}--{{ section.settings.horizontal_alignment }}" style="background-image: url({{ section.settings.hero_image | img_url: 'master' }});">
+    {% if section.settings.heading != blank %}
+      <h1 class="hero__heading">
+        {% assign heading = section.settings.heading | replace: '<p>', '<span>' | replace: '</p>', '</span>' %}
+        {{ heading  }}
+      </h1>
+    {% endif %} 
+    {% if section.settings.button_link != blank %}
+        <a class="hero__link button {{ section.settings.button_style }}" href="{{ section.settings.button_link }}" title="{{ section.settings.button_text }}">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+  </div>
+  {% if section.settings.hero_image_night != blank %}
+    <div class="hero__image hero__image-night {{ section.settings.text_color_night }} hero__content flex-container flex-container__{{ section.settings.vertical_alignment_night }}--{{ section.settings.horizontal_alignment_night }}" style="background-image: url({{ section.settings.hero_image_night | img_url: 'master' }});">
+      {% if section.settings.heading_night != blank %}
+        <h1 class="hero__heading">
+          {% assign heading = section.settings.heading_night | replace: '<p>', '<span>' | replace: '</p>', '</span>' %}
+          {{ heading  }}
+        </h1>
+      {% endif %} 
+      {% if section.settings.button_link_night != blank %}
+        <a class="hero__link button {{ section.settings.button_style_night }}" href="{{ section.settings.button_link_night }}" title="{{ section.settings.button_text_night }}">
+          {{ section.settings.button_text_night }}
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+  <div class="hero__shift-container">
+    <div class="hero__shift-loader">
+      {% for counter in (0..12) %}
+        <div class="hero__shift-marker">
+          <span></span>
+        </div>
+      {% endfor %}
+      <div class="hero__shift-hour">
+        <span></span>
+      </div>
+      <div class="hero__shift-minute">
+        <span></span>
+      </div>
+    </div>
+    <div class="hero__shift-toggle">
+      <div class="hero__shift-day">
+        {% include 'icon-sun' %}
+      </div>
+      <div class="hero__shift-night">
+        {% include 'icon-moon' %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type": "range",
+        "id": "height",
+        "label": "Vertical Height",
+        "default": 72,
+        "min": 0,
+        "max": 100
+      },
+      {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "label": "Text Color",
+        "options": [
+          {
+            "value": "text-color__button-color",
+            "label": "Button Color"
+          },
+          {
+            "value": "text-color__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "text-color__brand-white",
+            "label": "White"
+          },
+          {
+            "value": "text-color__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "text-color__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "text-color__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "text-color__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "text-color__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "text-color__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "button__button-color",
+            "label": "Classic"
+          },
+          {
+            "value": "button__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "button__transparent-white",
+            "label": "Transparent with White Border"
+          },
+          {
+            "value": "button__transparent-black",
+            "label": "Transparent with Black Border"
+          },
+          {
+            "value": "button__white",
+            "label": "White"
+          },
+          {
+            "value": "button__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "button__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "button__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "button__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "button__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "vertical_alignment",
+        "label": "Vertical Alignment",
+        "options": [
+          {
+            "value": "start",
+            "label": "Start"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "end",
+            "label": "End"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "horizontal_alignment",
+        "label": "Horizontal Alignment",
+        "options": [
+       {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+         ]
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Image (Day Theme)"
+      },
+      {
+        "type": "richtext",
+        "id": "heading_night",
+        "label": "Heading"
+      },
+      {
+        "type": "select",
+        "id": "text_color_night",
+        "label": "Text Color",
+        "options": [
+          {
+            "value": "text-color__button-color",
+            "label": "Button Color"
+          },
+          {
+            "value": "text-color__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "text-color__brand-white",
+            "label": "White"
+          },
+          {
+            "value": "text-color__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "text-color__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "text-color__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "text-color__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "text-color__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "text-color__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "button_text_night",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link_night",
+        "label": "Button link"
+      },
+      {
+        "type": "select",
+        "id": "button_style_night",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "button__button-color",
+            "label": "Classic"
+          },
+          {
+            "value": "button__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "button__transparent-white",
+            "label": "Transparent with White Border"
+          },
+          {
+            "value": "button__transparent-black",
+            "label": "Transparent with Black Border"
+          },
+          {
+            "value": "button__white",
+            "label": "White"
+          },
+          {
+            "value": "button__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "button__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "button__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "button__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "button__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image_night",
+        "label": "Image (Night Theme)"
+      },
+      {
+        "type": "select",
+        "id": "vertical_alignment_night",
+        "label": "Vertical Alignment",
+        "options": [
+          {
+            "value": "start",
+            "label": "Start"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "end",
+            "label": "End"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "horizontal_alignment_night",
+        "label": "Horizontal Alignment",
+        "options": [
+       {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+         ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero",
+        "category": "Feature"
+      }
+    ]
+  }
+{% endschema %}

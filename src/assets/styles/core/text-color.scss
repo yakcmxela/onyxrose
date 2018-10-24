@@ -1,0 +1,75 @@
+.text-color__button-color {
+  color: $button-color;
+  svg {
+  	path { 
+  		fill: $button-color;
+  	}
+  }
+}
+.text-color__brand-black {
+  color: $brand-black;
+  svg {
+  	path { 
+  		fill: $brand-black;
+  	}
+  }
+}
+.text-color__brand-white {
+  color: $brand-white;
+  svg {
+  	path { 
+  		fill: $brand-white;
+  	}
+  }
+}
+.text-color__brand-purple-dark {
+  color: $brand-purple-dk;
+  svg {
+  	path { 
+  		fill: $brand-purple-dk;
+  	}
+  }
+}
+.text-color__brand-purple-mid {
+  color: $brand-purple-md;
+  svg {
+    path { 
+      fill: $brand-purple-md;
+    }
+  }
+}
+.text-color__brand-purple-light {
+  color: $brand-purple-lt;
+  svg {
+  	path { 
+  		fill: $brand-purple-lt; 
+  	}
+  }
+}
+.text-color__brand-green {
+  color: $brand-green;
+  svg {
+  	path { 
+  		fill: $brand-green;
+  	}
+  }
+}
+.text-color__brand-yellow {
+  color: $brand-yellow;
+  svg {
+    path { 
+      fill: $brand-yellow;
+    }
+  }
+}
+.text-color__brand-pink {
+  color: $brand-pink;
+  svg {
+  	path { 
+  		fill: $brand-pink;
+  	}
+  }
+}
+a {
+  color: inherit;
+}

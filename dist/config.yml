@@ -1,0 +1,6 @@
+development:
+  password: d7aaf078442ed49020c0d1771b20f425
+  theme_id: "31641796665"
+  store: onyxandrose-com.myshopify.com
+  ignore_files:
+  - config/settings_data.json

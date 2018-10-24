@@ -1,0 +1,134 @@
+.rewards-tabs {
+	width: 100%;
+	padding: $gap;
+	padding-top: 0px;
+	.grid-columns__item {
+		text-align: center;
+	}
+	@media(max-width: $phablet) {
+		padding: $half-gap 0;
+	}
+}
+.rewards-tabs__header {
+	display: flex;
+	justify-content: center;
+	border-bottom: 2px solid $brand-black;
+	h2 {
+		margin: $gap;
+		font-size: 2.2rem;
+		span {
+			transition: all .15s linear;
+			&:after {
+				transition: inherit;
+				opacity: 0;
+			}
+		}
+		&.active,
+		&:hover {
+			cursor: pointer;
+			&:after {
+				display: none;
+			};
+			span {
+				transform: translateY(-4px);
+				&:after {
+					opacity: 1;
+				}
+			}
+		}
+
+	}
+	@media(max-width: $phablet) {
+		justify-content: space-between;
+		h2 {
+			font-size: 1.5rem;
+			margin: $quarter-gap;
+		}
+	}
+}
+.rewards-tabs__grid-container {
+	padding: $gap;
+	width: 100%;
+	position: relative;
+	height: auto;
+	transition: all .5s ease-out;
+}
+.rewards-tabs__grid {
+	width: 100%;
+	flex-shrink: 0;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: calc(100% - (#{$gap} * 2));
+	.grid-columns__item {
+		opacity: 0;
+		transition: all .5s linear;
+		transform-style: preserve-3d;
+		//perspective: 1000px;
+		.rewards-tabs__item {
+			transition: inherit;
+			transform: rotateY(180deg);
+		}
+		$i: 1;
+		$delay: .15;
+		@while($i < 24) {
+			&:nth-child(#{$i}) {
+				transition-delay: $delay * 1s;
+			}
+			$delay: $delay + .1;
+			$i: $i + 1;
+		}
+	}
+	&.active {
+		.grid-columns__item {
+			opacity: 1;
+			.rewards-tabs__item {
+				transform: rotateY(0deg);
+			}
+		}
+	}
+}
+
+.rewards-tabs__item {
+	text-align: center;
+	h4 {
+		text-transform: uppercase;
+		font-weight: $font-heading-bold;
+		letter-spacing: 2px;
+		margin: $half-gap auto;
+		font-size: 1.5rem;
+	}
+}
+
+.rewards-tabs__value {
+	display: flex;
+	justify-content: flex-end;
+	border-bottom: 2px solid $brand-black;
+	text-align: right;
+	span {
+		background-color: $brand-black;
+		padding: $quarter-gap $half-gap;
+		color: $brand-white;
+		font-family: $font-heading;
+		font-size: 1.4rem;
+		letter-spacing: 3px;
+	}
+}
+
+.rewards-tabs__icon {
+	width: 100%;
+	padding: calc(#{$gap} * 2) $gap $quarter-gap $gap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	img {
+		max-height: 100px;
+		max-width: none;
+	}
+	svg {
+		height: 100px;
+		width: 100px;
+	}
+}

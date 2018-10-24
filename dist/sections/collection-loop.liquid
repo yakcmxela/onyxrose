@@ -1,0 +1,238 @@
+{% assign count = 0 %}
+{% for block in section.blocks %}
+	{% assign count = count | plus: 1 %}
+{% endfor %}
+<div class="grid-columns-{{ settings.products_per_row }} collection-grid" data-section-type="collection-loop" data-section-id="{{ section.id }}">
+	{% if count > 0 %}
+		{% for block in section.blocks %}
+			{% if block.type == 'product_block' %}
+				<div class="collection-grid grid-columns__item collection-grid__product">
+					{%- assign product = all_products[block.settings.product] -%}
+					{% if product != empty %}
+						{% include 'product-overview' %}
+		       {% endif %}
+	      </div>
+			{% elsif block.type == 'promo_block' %}
+				<div class="collection-grid grid-columns__item collection-grid__promo" style="background-image: url({{ block.settings.image | img_url: '600x' }})">
+					<div class="flex-container flex-container__{{ block.settings.vertical_alignment }}--{{ block.settings.horizontal_alignment }} {{ block.settings.text_color }}">
+						{% if block.settings.caption %}
+							<h2>{{ block.settings.caption }}</h2>
+						{% endif %}
+						{% if block.settings.button_link != blank %}
+							{% if block.settings.button_title != blank %}
+								{% assign button_text = section.settings.button_title %}
+							{% else %}
+								{% assign button_text = 'Learn More' %}
+							{% endif %}
+							<a class="button {{ block.settings.button_style }}" href="{{ block.settings.button_link }}" title="{{ button_text }}">{{ button_text }}</a>
+						{% endif %}
+						</div>
+					</div>
+				{% endif %}
+		{% endfor %}
+	{% else %}
+		{% for product in collection.products %}
+	      <div class="grid-columns__item">
+	        {% include 'product-overview' %}
+	      </div>
+		{% else %}
+	  	{% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+	    	{% for i in (1..8) %}
+		      <a href="#">
+		        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+		        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+		      </a>
+
+		      <p>
+		        <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+		      </p>
+
+		      <p>
+		        {{ 1999 | money }}
+		      </p>
+		    {% endfor %}
+		  {% else %}
+		    <p>{{ 'collections.general.no_matches' | t }}</p>
+	  	{% endif %}
+		{% endfor %}
+		{% if paginate.pages > 1 %}
+	    {% include 'pagination' %}
+	  {% endif %}
+	{% endif %}
+</div>
+{% schema %}
+  {
+    "name": "Collection Grid",
+    "blocks": [
+    	{
+    		"type": "product_block",
+    		"name": "Product Block",
+    		"settings": [
+    			{
+    				"type": "product",
+    				"id": "product",
+    				"label": "Product"
+    			}
+    		]
+    	},
+    	{
+    		"type": "promo_block",
+	    	"name": "Promo Block",
+	    	"settings": [
+	    		{
+		        "type": "text",
+		        "id": "caption",
+		        "label": "Caption"
+		      },
+		      {
+		        "type": "select",
+		        "id": "text_color",
+		        "label": "Text Color",
+		        "options": [
+		          {
+		            "value": "text-color__button-color",
+		            "label": "Button Color"
+		          },
+		          {
+		            "value": "text-color__brand-black",
+		            "label": "Black"
+		          },
+		          {
+		            "value": "text-color__brand-white",
+		            "label": "White"
+		          },
+		          {
+		            "value": "text-color__brand-purple-dark",
+		            "label": "Purple Dark"
+		          },
+		          {
+		            "value": "text-color__brand-purple-mid",
+		            "label": "Purple Mid"
+		          },
+		          {
+		            "value": "text-color__brand-purple-light",
+		            "label": "Purple Light"
+		          },
+		          {
+		            "value": "text-color__brand-green",
+		            "label": "Green"
+		          },
+		          {
+		            "value": "text-color__brand-yellow",
+		            "label": "Yellow"
+		          },
+		          {
+		            "value": "text-color__brand-pink",
+		            "label": "Pink"
+		          }
+		        ]
+		      },
+		      {
+		        "type": "text",
+		        "id": "button_text",
+		        "label": "Button Text"
+		      },
+		      {
+		        "type": "url",
+		        "id": "button_link",
+		        "label": "Button link"
+		      },
+		      {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "options": [
+              {
+                "value": "button__button-color",
+                "label": "Classic"
+              },
+              {
+                "value": "button__brand-black",
+                "label": "Black"
+              },
+              {
+		            "value": "button__transparent-white",
+		            "label": "Transparent with White Border"
+		          },
+		          {
+		            "value": "button__transparent-black",
+		            "label": "Transparent with Black Border"
+		          },
+              {
+                "value": "button__white",
+                "label": "White"
+              },
+              {
+                "value": "button__brand-purple-dark",
+                "label": "Purple Dark"
+              },
+              {
+		            "value": "button__brand-purple-mid",
+		            "label": "Purple Mid"
+		          },
+              {
+                "value": "button__brand-purple-light",
+                "label": "Purple Light"
+              },
+              {
+                "value": "button__brand-green",
+                "label": "Green"
+              },
+              {
+                "value": "button__brand-yellow",
+                "label": "Yellow"
+              },
+              {
+                "value": "button__brand-pink",
+                "label": "Pink"
+              }
+            ]
+          },
+		      {
+		        "type": "image_picker",
+		        "id": "image",
+		        "label": "Image"
+		      },
+		      {
+		        "type": "select",
+		        "id": "vertical_alignment",
+		        "label": "Vertical Alignment",
+		        "options": [
+		          {
+		            "value": "start",
+		            "label": "Start"
+		          },
+		          {
+		            "value": "center",
+		            "label": "Center"
+		          },
+		          {
+		            "value": "end",
+		            "label": "End"
+		          }
+		        ]
+		      },
+		      {
+		        "type": "select",
+		        "id": "horizontal_alignment",
+		        "label": "Horizontal Alignment",
+		        "options": [
+			     {
+		            "value": "left",
+		            "label": "Left"
+		          },
+		          {
+		            "value": "center",
+		            "label": "Center"
+		          },
+		          {
+		            "value": "right",
+		            "label": "Right"
+		          }
+			       ]
+		      }
+	    	]
+    	}
+    ]
+  }
+{% endschema %}

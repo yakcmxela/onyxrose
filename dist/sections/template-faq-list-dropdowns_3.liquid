@@ -1,0 +1,96 @@
+{% if section.settings.featured_image == blank %}
+	{% assign has_image = 'list-dropdowns__no-image' %}
+{% else %}
+	{% assign has_image = 'list-dropdowns__has-image' %}
+{% endif %}
+<section data-section-type="list-dropdowns list-dropdowns__faq" data-section-id="{{ section.id }}" class="list-dropdowns {{ has_image }} list-dropdowns__faq">
+	{% if section.settings.heading != blank %}
+		{%- assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] -%}
+	  {% include 'color-wayfinder-case' %}
+		<h2 class="wayfinder__level {{ wayfinder }}"><span>{{ section.settings.heading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</span></h2>
+	{% endif %}
+	<div class="list-dropdowns__container">
+		{% if section.blocks != empty %}
+			<div class="list-dropdowns__list {{ section.settings.background_color }}">
+				{% if section.settings.list_heading != blank %}
+					<h3>{{ section.settings.list_heading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</h3>
+				{% endif %}
+				{% for block in section.blocks %}
+					<div class="list-dropdowns__item">
+						{% if block.settings.item_heading != blank %}
+							<div class="list-dropdowns__item-heading">
+								<h4>{{ block.settings.item_heading }}</h4>
+								<div class="list-dropdowns__expand"><div class="shop__icon-plus"></div></div>
+							</div>
+						{% endif %}
+						{% if block.settings.item_caption %}
+							<div class="list-dropdowns__item-caption">
+								<p>{{ block.settings.item_caption }}</p>
+							</div>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+		{% endif %}
+		{% if section.settings.featured_image != blank %}
+			<div class="list-dropdowns__image">
+				<img src="{{ section.settings.featured_image | img_url: 'master' }}">
+			</div>
+		{% endif %}
+	</div>
+</section> 
+{% schema %}
+	{
+		"name": "List with dropdowns",
+		"settings": [
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Section Heading"
+			},
+			{
+				"type": "richtext",
+				"id": "list_heading",
+				"label": "List Heading"
+			},
+			{
+        "type": "select",
+        "id": "background_color",
+        "label": "Background Color",
+        "options": [
+       		{
+            "value": "list-dropdowns__white",
+            "label": "White"
+         	},
+          {
+            "value": "list-dropdowns__grey",
+            "label": "Grey"
+          }
+        ]
+      },
+			{
+				"type": "image_picker",
+				"id": "featured_image",
+				"label": "Featured Image"
+			}
+		],
+		"blocks": [
+			{
+				"type": "list",
+				"name": "List Item",
+				"settings": [
+					{
+						"type": "text",
+						"id": "item_heading",
+						"label": "Item Heading"
+					},
+					{
+						"type": "richtext",
+						"id": "item_caption",
+						"label": "Item Caption"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

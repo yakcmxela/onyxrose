@@ -1,0 +1,41 @@
+.template-login {
+	h1 {
+		margin-bottom: $gap;
+	}
+	#CustomerLoginForm {
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		    justify-content: center;
+		    input {
+		    	min-width: 350px;
+		    }
+		    .button {
+		    	min-width: 200px;
+		    	margin: 0;
+		    }
+		    a {
+		    	display: block;
+		    	margin: 0 0 .5rem 0;
+		    }
+		}
+	}
+	#CustomerEmail,
+	#CustomerPassword,
+	#RecoverEmail {
+		width: 350px;
+		margin: 0 auto $half-gap auto;
+	}
+	#RecoverPasswordForm {
+		text-align: center;
+	}
+	.recover-password {
+		margin: 0;
+	}
+}
+
+.login__user-options {
+	text-align: center;
+	margin-top: $half-gap;
+}

@@ -1,0 +1,232 @@
+{%- comment -%}
+  This is a required section for the Shopify Theme Store.
+  It is available when you add the "Image with text" section in the theme editor.
+
+  Theme Store required settings
+  - Image
+  - Heading: title of the block
+  - Text: description of the block
+
+  Theme Store optional settings
+  - Button label: label associated with the button
+  - Button link: link of the button
+{%- endcomment -%}
+{% if section.settings.accent_image != blank %}
+  {% assign margin = 'has_accent' %}
+{% else %}
+  {% assign margin = 'no_accent' %}
+{% endif %}
+<section class="double-image-text {{ margin }} {{ section.settings.row_direction }} {{ section.settings.background_size }}">
+  <div class="double-image-text__images">
+    <div class="double-image-text__image">
+      {% if section.settings.image_1 != blank %}
+        <img src="{{ section.settings.image_1 | img_url: 'master' }}">
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+    <div class="double-image-text__image">
+      {% if section.settings.image_2 != blank %}
+        <img src="{{ section.settings.image_2 | img_url: 'master' }}">
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="double-image-text__text">
+    <div class="flex-container flex-container__{{ section.settings.vertical_alignment }}--{{ section.settings.horizontal_alignment }}">
+      {% if section.settings.heading != blank %}
+        <h2>{{ section.settings.heading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <h3>{{ section.settings.subheading | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</h3>
+      {% endif %}
+      {% if section.settings.caption != blank %}
+        {{ section.settings.caption }}
+      {% endif %}
+      {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+        <a class="button {{ section.settings.button_style }}" href="{{ section.settings.button_link }}">
+          {{ section.settings.button_text | escape }}
+        </a>
+      {% endif %}
+      {% if section.settings.accent_image != blank %}
+        <div class="double-image-text__accent-image">
+          <img src="{{ section.settings.accent_image | img_url: '300x' }}">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Two Images with text",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Image 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2"
+      },
+      {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "richtext",
+        "id": "caption",
+        "label": "Caption"
+      },
+      {
+        "type": "select",
+        "id": "vertical_alignment",
+        "label": "Vertical Alignment",
+        "default": "center",
+        "options": [
+          {
+            "value": "start",
+            "label": "Start"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "end",
+            "label": "End"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "horizontal_alignment",
+        "label": "Horizontal Alignment",
+        "options": [
+       {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+         ]
+      },
+      {
+        "type": "select",
+        "id": "row_direction",
+        "label": "Row Direction",
+        "options": [
+          {
+            "value": "row",
+            "label": "Normal"
+          },
+          {
+            "value": "row-reverse",
+            "label": "Reverse"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "background_size",
+        "label": "Background Size",
+        "options": [
+          {
+            "value": "double-image-text__partial-bg",
+            "label": "Partial"
+          },
+          {
+            "value": "double-image-text__full-bg",
+            "label": "Full"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+      {
+        "type": "image_picker",
+        "id": "accent_image",
+        "label": "Accent Image",
+        "info": "Image to appear below text area"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "button__button-color",
+            "label": "Classic"
+          },
+          {
+            "value": "button__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "button__transparent",
+            "label": "Transparent"
+          },
+          {
+            "value": "button__white",
+            "label": "White"
+          },
+          {
+            "value": "button__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "button__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "button__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "button__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "button__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Two Images with text",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,62 @@
+<h1 class="text__wayfinder wayfinder__button-color wayfinder__level"><span>{{ 'customer.register.title' | t }}</span></h1>
+
+{% form 'create_customer' %}
+  {{ form.errors | default_errors }}
+
+  <label for="FirstName" class="label-hidden">
+    {{ 'customer.register.first_name' | t }}
+  </label>
+  <input type="text"
+    name="customer[first_name]"
+    id="FirstName"
+    placeholder="{{ 'customer.register.first_name' | t }}"
+    autofocus
+    {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+
+  <label for="LastName" class="label-hidden">
+    {{ 'customer.register.last_name' | t }}
+  </label>
+  <input type="text"
+    name="customer[last_name]"
+    id="LastName"
+    placeholder="{{ 'customer.register.last_name' | t }}"
+    {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+
+  <label for="Email" class="label-hidden">
+    {{ 'customer.register.email' | t }}
+  </label>
+  <input type="email"
+    name="customer[email]"
+    id="Email"
+    class="{% if form.errors contains 'email' %}input-error{% endif %}"
+    placeholder="{{ 'customer.register.email' | t }}"
+    value="{% if form.email %}{{ form.email }}{% endif %}"
+    spellcheck="false"
+    autocomplete="off"
+    autocapitalize="off">
+
+  <label for="CreatePassword" class="label-hidden">
+    {{ 'customer.register.password' | t }}
+  </label>
+  <input type="password"
+    name="customer[password]"
+    id="CreatePassword"
+    class="{% if form.errors contains 'password' %}input-error{% endif %}"
+    placeholder="{{ 'customer.register.password' | t }}">
+
+  <label for="CheckPassword" class="label-hidden">
+    Verify Password
+  </label>
+  <input type="password"
+    id="CheckPassword"
+    placeholder="Verify Password">
+  <div class="register__password-error"></div>
+
+  <div class="button button__button-color button__form-input">
+    <input id="register-user" type="submit" value="{{ 'customer.register.submit' | t }}" class="button">
+  </div>
+  <div class="login__user-options">
+    <a href="/account/login">Already have an account? Log in</a>
+    <a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
+  </div>
+{% endform %}

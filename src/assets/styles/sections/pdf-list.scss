@@ -1,0 +1,13 @@
+.pdf-list {
+	text-align: center;
+	padding: $gap 0;
+	.grid-columns__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		a {
+			color: $button-color;
+		}
+	}
+}

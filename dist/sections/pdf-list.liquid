@@ -1,0 +1,32 @@
+<section class="pdf-list grid-columns-4 collection-grid" data-section-type="pdf-list" data-section-id="{{ section.id }}">
+	{% for block in section.blocks %}
+		<div class="grid-columns__item">
+			{% assign file = block.settings.filename %}
+			<embed width="200" height="300" name="plugin" src="{{ file | file_url }}" type="application/pdf">
+			<a href="{{ file | file_url }}" download>{{ block.settings.title }}</a>
+		</div>
+	{% endfor %}
+</section>
+{% schema %}
+	{
+		"name": "PDF List",
+		"blocks": [
+			{
+				"type": "pdf",
+				"name": "PDF",
+				"settings": [
+					{
+						"type": "text",
+						"id": "filename",
+						"label": "Filename (ie mypdf.pdf)"
+					},
+					{
+						"type": "text",
+						"id": "title",
+						"label": "File Title (ie My PDF)"
+					}
+				]
+			}
+		]
+	}
+{% endschema %}

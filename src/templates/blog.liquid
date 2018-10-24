@@ -1,0 +1,81 @@
+{% comment %}{% section 'template-blog-featured-post' %}{% endcomment %}
+
+{% paginate blog.articles by 10 %}
+
+  {%- assign blog_title = blog.title -%}
+
+  {% if current_tags %}
+    {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
+  {% endif %}
+
+  <h1 class="text__wayfinder wayfinder__lowered wayfinder__brand-grey-mid"><span>{{ blog_title }}</span></h1>
+
+  {% assign featured = blog.articles[0] %}
+  {% if featured != blank %}
+    <div class="blog__articles-featured" style="background-image: url( {{ featured.image | img_url: 'master' }} )">
+      {% capture date %}{{ featured.published_at | date: "%b %d, %Y" }}{% endcapture %}
+      <ul class="blog__article-meta">
+        <li>
+          {% assign wc = featured.content | strip_html | split: " " | size %}
+          {% assign wpm = 200.00 %}
+          {% assign min = wc | divided_by: wpm | round: 0 %}
+          {% if min > 1 %}
+            {{ min }} Min Read Time
+          {% else %}
+            1 Min Read Time
+          {% endif %}
+        </li>
+        <li>{{ date }}</li>
+      </ul>
+      <h2>{{ featured.title }}</h2>
+      <div class="rte">
+        {% if featured.excerpt.size > 0 %}
+          {{ featured.excerpt | strip_html | truncatewords: 20 }}
+        {% else %}
+          <p>{{ featured.content | strip_html | truncatewords: 20 }}</p>
+        {% endif %}
+      </div>
+      <a href="{{ featured.url }}" class="button button__button-color button__button-color-white-arrow">Read More</a>
+    </div>
+  {% endif %}
+  <div class="blog__articles">
+    {% if blog.articles[1] != blank %}
+      <ul class="blog__articles-column blog__articles-column-1">
+        {%- assign i = 0 -%}
+        {% for article in blog.articles %}
+            {% if i == 1 or i == 4 or i == 7 %}
+              <li class="blog__articles-article">{% include 'blog-article-preview' %}</li>
+            {% endif %}
+          {% assign i = i | plus: 1 %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if blog.articles[2] != blank %}
+      <ul class="blog__articles-column blog__articles-column-2">
+        {%- assign i = 0 -%}
+        {% for article in blog.articles %}
+            {% if i == 2 or i == 5 or i == 8 %}
+              <li class="blog__articles-article">{% include 'blog-article-preview' %}</li>
+            {% endif %}
+          {% assign i = i | plus: 1 %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% if blog.articles[3] != blank %}
+      <ul class="blog__articles-column blog__articles-column-3">
+        {%- assign i = 0 -%}
+        {% for article in blog.articles %}
+            {% if i == 3 or i == 6 or i == 9 %}
+              <li class="blog__articles-article">{% include 'blog-article-preview' %}</li>
+            {% endif %}
+          {% assign i = i | plus: 1 %}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+
+  {% if paginate.pages > 1 %}
+    {% include 'pagination' %}
+  {% endif %}
+
+{% endpaginate %}

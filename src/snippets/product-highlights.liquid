@@ -1,0 +1,52 @@
+{% assign separator = "|###|" %}
+{% assign highlights_image = product.metafields.custom_fields["highlights_image"] %}
+{% assign highlights_heading = product.metafields.custom_fields["highlights_heading"] %}
+{% assign highlights_background_color = product.metafields.custom_fields["highlights_background_color"] %}
+{% case highlights_background_color %}
+  {% when 'Button Color' %}
+    {% assign background_color = 'background-color__button-color' %}
+  {% when 'Black' %}
+    {% assign background_color = 'background-color__brand-black' %}
+  {% when 'White' %}
+    {% assign background_color = 'background-color__brand-white' %}
+  {% when 'Purple Dark' %}
+    {% assign background_color = 'background-color__brand-purple-dark' %}
+  {% when 'Purple Mid' %}
+    {% assign background_color = 'background-color__brand-purple-mid' %}
+  {% when 'Purple Light' %}
+    {% assign background_color = 'background-color__brand-purple-light' %}
+  {% when 'Green' %}
+    {% assign background_color = 'background-color__brand-green' %}
+  {% when 'Pink' %}
+    {% assign background_color = 'background-color__brand-pink' %}
+{% endcase %}
+{% assign highlight_array = product.metafields.custom_fields["highlight"] | split: separator %}
+<div class="product-highlights {{ product.title | handleize }}">
+  {% if highlights_heading != blank %}
+    <h2 class="text__wayfinder wayfinder__level wayfinder__brand-green"><span>{{ highlights_heading }}</span></h2>
+  {% endif %}
+
+  <div class="product-highlights__container {{ background_color }}">
+    <div class="product-highlights__highlights">
+      <div class="product-highlights__highlight">
+        <div class="shop__icon-plus"></div>
+        {{ highlight_array[0] }}
+      </div>
+      <div class="product-highlights__highlight">
+        <div class="shop__icon-plus"></div>
+        {{ highlight_array[1] }}
+      </div>
+    </div>
+    <img src="{{ highlights_image }}">
+    <div class="product-highlights__highlights">
+      <div class="product-highlights__highlight">
+        <div class="shop__icon-plus"></div>
+        {{ highlight_array[2] }}
+      </div>
+      <div class="product-highlights__highlight">
+        <div class="shop__icon-plus"></div>
+        {{ highlight_array[3] }}
+      </div>
+    </div>
+  </div>
+</div>

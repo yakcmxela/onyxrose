@@ -1,0 +1,24 @@
+{% case button_style_selection %}
+  {% when 'Button Color' %}
+    {% assign button_style = 'button__button-color' %}
+  {% when 'Black' %}
+    {% assign button_style = 'button__brand-black' %}
+  {% when 'White' %}
+    {% assign button_style = 'button__white' %}
+  {% when 'Black Border' %}
+    {% assign button_style = 'button__transparent-black' %}
+  {% when 'white Border' %}
+    {% assign button_style = 'button__transparent-white' %}
+  {% when 'Purple Dark' %}
+    {% assign button_style = 'button__brand-purple-dark' %}
+  {% when 'Purple Mid' %}
+    {% assign button_style = 'button__brand-purple-mid' %}
+  {% when 'Purple Light' %}
+    {% assign button_style = 'button__brand-purple-light' %}
+  {% when 'Green' %}
+    {% assign button_style = 'button__brand-green' %}
+  {% when 'Yellow' %}
+    {% assign button_style = 'button__brand-yellow' %}
+  {% when 'Pink' %}
+    {% assign button_style = 'button__brand-pink' %}
+{% endcase %}

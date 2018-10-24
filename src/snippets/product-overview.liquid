@@ -1,0 +1,151 @@
+<a href="{{ product.url | within: collection }}" class="product__content">
+  {% include 'bold-product' with product, hide_action: 'skip' %}
+  {% if custom_image != blank %}
+    <div class="responsive-image__wrapper">
+      {% include 'responsive-image' with
+        image: custom_image,
+        max_width: 1000,
+        max_height: 1000
+      %}
+    </div>
+  {% elsif product.featured_image != blank %}
+    <div class="responsive-image__wrapper">
+      {% include 'responsive-image' with
+        image: product.featured_image,
+        max_width: 1000,
+        max_height: 1000
+      %}
+    </div>
+  {% endif %}
+
+  {%- include 'bold-variant' with current_variant, output: 'none' -%}
+
+  {% for tag in product.tags %}
+    {% if tag == 'Full Spectrum' %}
+      <span class="product__overview-tag">{{ tag }}</span>
+    {% endif %}
+  {% endfor %}
+
+  <h2 class="product__overview-title">{{ product.title | escape }}</h2>
+  <div class="yotpo bottomLine product_overview_bottomLine"
+    data-appkey="IGg6x6JCG54gfOPPK4k0JECwSWzNuApNS2ags9jx"
+    data-domain="{{shop.permanent_domain | escape }}"
+    data-product-id="{{ product.id }}"
+    data-product-models="{{ product.id }}"
+    data-name="{{ product.title | escape }}"
+    data-url="{{ shop.url }}{{ product.url }}"
+    data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+    data-description="{{ product.description | escape }}"
+    data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+  </div>
+
+</a>
+<form class="product__form" action="/cart/add" method="post" enctype="multipart/form-data">
+  {% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+      <div class="selector-wrapper no-js product__variants">
+        <label for="SingleOptionSelector-{{ forloop.index0 }}">
+          {{ option.name }}
+        </label>
+
+        <select
+          id="SingleOptionSelector-{{ forloop.index0 }}"
+          data-single-option-selector
+          data-index="option{{ option.position }}">
+          {% for value in option.values %}
+            <option
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}selected="selected"{% endif %}>
+                {{ value }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    {% endfor %}
+  {% endunless %}
+
+  {% comment %}<div class="product__variants-dropdown filter-dropdown">
+    <ul name="id" class="js product__variants" data-product-select >
+      {% for variant in product.variants limit: 1 %}
+      <li
+        class="product__variants-selected"
+        data-variant-id="{{ variant.id }}" >
+        <span class="product__variant-price product__variant-price-selected">{{ variant.price | money }}</span>
+        <span> / </span>
+        <span class="product__variant-title product__variant-title-selected">{{ variant.title }}</span>
+      </li>
+      {% endfor %}
+      {% for variant in product.variants %}
+      <li
+        data-variant-id="{{ variant.id }}"
+        data-variant-title="{{ variant.title }}"
+        class="product__variant-option"
+      >
+        <span class="product__variant-price">{{ variant.price | money }}</span>
+        <span> / </span>
+        <span class="product__variant-title">{{ variant.title }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>{% endcomment %}
+
+  {% if product.variants.size > 1 %}
+    <div class="product__variants-container">
+       <select name="id" class="js product__variants" data-product-select>
+        {% for variant in product.variants %}
+        {% include 'bold-variant' with variant, hide_action: 'skip'  %}
+          <option
+            {% if variant == current_variant %}selected="selected"{% endif %}
+            {% unless variant.available %}disabled="disabled"{% endunless %}
+            value="{{ variant.id }}">
+              {{ bold_variant_price | money }} /
+              {{ variant.title }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+  {% else %}
+    <select name="id" class="product__simple-title" data-product-select>
+      {% for variant in product.variants %}
+      {% include 'bold-variant' with variant, hide_action: 'skip'  %}
+      <option value="{{ variant.id }}" selected>
+         {{ bold_price | money }}
+        {% if product.metafields.custom_fields["product_volume"] != blank %}
+          / {{ product.metafields.custom_fields["product_volume"] }}
+        {% endif %}
+      </option>
+      {% endfor %}
+    </select>
+  {% endif %}
+
+  <div class="product__quantity">
+    <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+    <input type="number" id="Quantity" name="quantity" value="1" min="1">
+  </div>
+
+  <div data-price-wrapper>
+    <span data-product-price>
+      {{ current_variant.price | money }}
+    </span>
+
+    {% if product.compare_at_price_max > product.price %}
+      <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+      <s data-compare-price>
+        {% if current_variant.compare_at_price > current_variant.price %}
+          {{ current_variant.compare_at_price | money }}
+        {% endif %}
+      </s>
+    {% endif %}
+  </div>
+
+  <button
+    type="submit"
+    name="add"
+    class="button button__brand-black button__product"
+    data-add-to-cart
+    {% if current_variant.available %}disabled="disabled"{% endif %}>
+      <span data-add-to-cart-text>
+        {{ 'products.product.add_to_cart' | t }}
+      </span>
+  </button>
+</form>

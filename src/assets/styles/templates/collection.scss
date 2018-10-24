@@ -1,0 +1,38 @@
+.template-collection {
+	h1 {
+		font-family: $font-heading;
+		text-transform: uppercase;
+		margin: $gap 0 $half-gap 0;
+	}
+	.product__simple-title {
+		white-space: nowrap;
+	}
+}
+
+.collection-grid {
+}
+
+.collection-grid__promo {
+	background-size: cover;
+	background-position: center center;
+	padding: $gap;
+
+	@include media-query($small) {
+		display: none;
+	}
+}
+.collection-grid__product {
+	display: flex;
+	flex-direction: column;
+	form {
+		margin-top: auto;
+	}
+}
+
+.collection-grid__promo {
+	min-height: 100%;
+	height: calc((#{$gap} * 4) + 300px);
+	h2,h3 {
+		margin: $quarter-gap;
+	}
+}

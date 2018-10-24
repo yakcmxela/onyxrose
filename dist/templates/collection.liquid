@@ -1,0 +1,19 @@
+{% paginate collection.products by 12 %}
+  
+  {% section 'featured-product-slider' %}
+
+  <header role="banner">
+    <h1 class="text__wayfinder wayfinder__brand-green wayfinder__raised"><span>{{ collection.title }}</span></h1>
+    {% if collection.description != blank %}
+      <div class="rte">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+  </header>
+
+  {% section 'collection-loop' %}
+  {% section 'template-collection-images-with-text' %}
+  {% section 'template-collection-icon-text-row' %}
+  {% section 'template-collection-callout' %}
+
+{% endpaginate %}

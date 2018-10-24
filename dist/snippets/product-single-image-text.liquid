@@ -1,0 +1,45 @@
+{% assign separator = "|###|" %}
+{% assign heading = product.metafields.custom_fields["heading"] | split: separator %}
+{% assign subheading = product.metafields.custom_fields["subheading"] | split: separator %}
+{% assign caption = product.metafields.custom_fields["caption"] | split: separator %}
+{% assign featured_image = product.metafields.custom_fields["image"] | split: separator %}
+{% assign accent_image = product.metafields.custom_fields["accent_image"] | split: separator %}
+{% assign button_text = product.metafields.custom_fields["button_text"] | split: separator %}
+{% assign button_url = product.metafields.custom_fields["button_url"] | split: separator %}
+{% assign button_style_selection = product.metafields.custom_fields["button_style"] %}
+{% include 'button-style-case' %}
+{% if accent_image != blank %}
+  {% assign margin = 'has_accent' %}
+{% else %}
+  {% assign margin = 'no_accent' %}
+{% endif %}
+<section class="single-image-text {{ margin }}" data-section-type="single-image-text" data-section-id="{{ section.id }}">
+	<div class="single-image-text__content flex-container flex-container__center--left" style="text-align: {{ section.settings.alignment }}">
+    {% if heading != blank %}
+      <h2><span>{{ heading }}</span></h2>
+    {% endif %}
+    {% if subheading != blank %}
+      <h3>{{ subheading }}</h3>
+    {% endif %}
+		{% if caption != blank %}
+			{{ caption }}
+		{% endif %}
+		{% if button_text != blank and button_url != blank %}
+      <a class="button {{ button_style }}" href="{{ button_url }}">
+        {{ button_text }}
+      </a>
+    {% endif %}
+    {% if section.settings.accent_image != blank %}
+      <div class="single-image-text__accent-image">
+      	<img src="{{ section.settings.accent_image | img_url: '250x' }}">
+      </div>
+    {% endif %}
+	</div>
+	<div class="single-image-text__image">
+		{% if featured_image != blank %}
+      <img src="{{ featured_image }}">
+    {% else %}
+			{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+		{% endif %}
+	</div>
+</section>

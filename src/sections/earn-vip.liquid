@@ -1,0 +1,111 @@
+<section data-section-type="vip-points" data-section-id="{{ section.id }}" class="vip-points-table">
+	<table>
+		<tr>
+			<th class="vip-points__caption-head">
+				<p>{{ section.settings.caption_head }}</p>
+			</th>
+			<th>
+				{% include 'icon-bronze' %}
+			</th>
+			<th>
+				{% include 'icon-silver' %}
+			</th>
+			<th>
+				{% include 'icon-gold' %}
+			</th>
+		</tr>
+		<tr>
+			<td>
+				{% include 'icon-calendar' %}
+				<h3>{{ section.settings.caption_year }}</h3>
+			</td>
+			<td>
+				<h4>{{ section.settings.bronze_year }}</h4>
+			</td>
+			<td>
+				<h4>{{ section.settings.silver_year }}</h4>
+			</td>
+			<td>
+				<h4>{{ section.settings.gold_year }}</h4>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{% include 'icon-dollar' %}
+				<h3>{{ section.settings.caption_dollar }}</h3>
+			</td>
+			<td>
+				<h4>{{ section.settings.bronze_dollar }}</h4>
+			</td>
+			<td>
+				<h4>{{ section.settings.silver_dollar }}</h4>
+			</td>
+			<td>
+				<h4>{{ section.settings.gold_dollar }}</h4>
+			</td>
+		</tr>
+	</table>
+</section>
+{% schema %}
+	{
+		"name": "VIP Points Table",
+		"settings": [
+			{
+				"type": "richtext",
+				"id": "heading",
+				"label": "Section Heading"
+			},
+			{
+				"type": "richtext",
+				"id": "caption_head",
+				"label": "Table head caption"
+			},
+			{
+				"type": "richtext",
+				"id": "caption_year",
+				"label": "Points per year caption"
+			},
+			{
+				"type": "text",
+				"id": "bronze_year",
+				"label": "Bronze year"
+			},
+			{
+				"type": "text",
+				"id": "silver_year",
+				"label": "Silver year"
+			},
+			{
+				"type": "text",
+				"id": "gold_year",
+				"label": "Gold year"
+			},
+			{
+				"type": "richtext",
+				"id": "caption_dollar",
+				"label": "Points per dollar caption"
+			},
+			{
+				"type": "text",
+				"id": "bronze_dollar",
+				"label": "Bronze dollar"
+			},
+			{
+				"type": "text",
+				"id": "silver_dollar",
+				"label": "Silver dollar"
+			},
+			{
+				"type": "text",
+				"id": "gold_dollar",
+				"label": "Gold dollar"
+			}
+		],
+		"presets": [
+      {
+        "name": "VIP Points Table",
+        "category": "Members"
+      }
+    ]
+	}
+{% endschema %}

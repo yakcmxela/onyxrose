@@ -1,0 +1,117 @@
+<section style="background-image: url();">
+	{% assign featured_post = section.settings.post %}
+</section>
+{% schema %}
+	{
+		"name": "Blog Featured Post",
+		"settings": [
+			{
+				"type": "url",
+				"id": "post",
+				"label": "Blog Post"
+			},
+			{
+        "type": "select",
+        "id": "button_style",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "button__button-color",
+            "label": "Classic"
+          },
+          {
+            "value": "button__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "button__transparent-white",
+            "label": "Transparent with White Border"
+          },
+          {
+            "value": "button__transparent-black",
+            "label": "Transparent with Black Border"
+          },
+          {
+            "value": "button__white",
+            "label": "White"
+          },
+          {
+            "value": "button__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "button__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "button__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "button__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "button__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Image"
+      },
+      {
+      	"type": "range",
+      	"id": "height",
+      	"label": "Vertical Height",
+      	"default": 72,
+      	"min": 0,
+      	"max": 100
+      },
+      {
+        "type": "select",
+        "id": "vertical_alignment",
+        "label": "Vertical Alignment",
+        "options": [
+          {
+            "value": "start",
+            "label": "Start"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "end",
+            "label": "End"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "horizontal_alignment",
+        "label": "Horizontal Alignment",
+        "options": [
+	     {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+	       ]
+      }
+		]
+	}
+{% endschema %}

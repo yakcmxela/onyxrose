@@ -1,0 +1,68 @@
+.pagination {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: $font-callout;
+	.page {
+		display: block;
+		
+		a {
+			
+		}
+	}
+	.page a,
+	.current,
+	.next,
+	.prev {
+		background-color: $brand-black;
+		color: $brand-grey-md;
+		padding: $half-gap;
+		display: block;
+		transition: all .15s linear;
+		&:hover {
+			color: $brand-white;
+		}
+	}
+	.current {
+		position: relative;
+		color: $brand-white;
+		&:after {
+			content: '';
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: $brand-green;
+			width: 50%;
+			height: 4px;
+			position: absolute;
+		}
+	}
+	.next {
+		position: relative;
+		color: $brand-white;
+		&:after {
+			content: '';
+			left: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 1px;
+			height: 50%;
+			position: absolute;
+			background-color: $brand-grey-md;
+		}
+	}
+	.prev {
+		position: relative;
+		color: $brand-white;
+		&:after {
+			content: '';
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 1px;
+			height: 50%;
+			position: absolute;
+			background-color: $brand-grey-md;
+		}
+	}
+}

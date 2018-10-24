@@ -1,0 +1,33 @@
+<div class="blog__article-container">
+  <a href="{{ article.url }}">
+    <div class="blog__article-image" style="background-image: url( {{ article.image | img_url: '800x' }} )"></div>
+    {% capture date %}{{ article.published_at | date: "%b %d, %Y" }}{% endcapture %}
+    <div class="blog__article-content">
+      <ul class="blog__article-meta">
+        <li>
+          {% assign wc = article.content | strip_html | split: " " | size %}
+          {% assign wpm = 200.00 %}
+          {% assign min = wc | divided_by: wpm | round: 0 %}
+          {% if min > 1 %}
+            {{ min }} Min Read Time
+          {% else %}
+            1 Min Read Time
+          {% endif %}
+        </li>
+        <li>{{ date }}</li>
+      </ul>
+
+      <h3>
+        {{ article.title }}
+      </h3>
+
+      <div class="rte">
+        {% if article.excerpt.size > 0 %}
+          {{ article.excerpt | strip_html | truncatewords: 20 }}&rarr;
+        {% else %}
+          <p>{{ article.content | strip_html | truncatewords: 20 }} &rarr;</p>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</div>

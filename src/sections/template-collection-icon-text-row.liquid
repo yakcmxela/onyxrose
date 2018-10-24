@@ -1,0 +1,190 @@
+<section class="icon-text-row" data-section-type="icon-text-row" data-section-id="{{ section.id }}">
+  {% assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] %}
+  {% include 'color-wayfinder-case' %}
+  {% if section.settings.heading != blank %}
+    <h2 class="text__wayfinder {{ wayfinder }}">{{ section.settings.heading }}</h2>
+  {% endif %}
+  {% assign count = 0 %}
+  {% for block in section.blocks %}
+    {% assign count = count | plus: 1 %}
+  {% endfor %}
+  {% for block in section.blocks %}
+    {% assign count = count | plus: 1 %}
+  {% endfor %}
+  {% if section.blocks.size > 4 %}
+    {% assign grid = 3 %}
+  {% else %}
+    {% assign grid = 4 %}
+  {% endif %}
+  <div class="icon-text-row__row {{ section.settings.background_color }}">
+    <div class="flex-columns-{{ grid }}">
+      {% for block in section.blocks %}
+        <div class="icon-text-row__item flex-columns__item">
+          {% if block.settings.icon_svg != blank %}
+            {% assign icon = block.settings.icon_svg %}
+            {% include icon %}
+          {% elsif block.settings.icon != blank %}
+            <img src="{{ block.settings.icon | img_url: 'master' }}">
+          {% endif %}
+          {% if block.settings.title != blank %}
+            <h3 class="section-heading__level-centered"><span>{{ block.settings.title | replace_first: '<p>', '' | replace: '<p>', '<br>' | replace: '</p>', '' }}</span></h3>
+          {% endif %}
+          {% if block.settings.caption != blank %}
+            {{ block.settings.caption }}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% if section.settings.button_text != blank and section.settings.button_link != blank %}
+    <a class="button {{ section.settings.button_style }}" href="{{ section.settings.button_link }}">
+      {{ section.settings.button_text | escape }}
+    </a>
+   {% endif %}
+</section>
+{% schema %}
+  {
+    "name": "Icons & Text Row",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "select",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "background-color__white",
+        "options": [
+          {
+            "value": "background-color__button-color",
+            "label": "Button color"
+          },
+          {
+            "value": "background-color__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "background-color__white",
+            "label": "White"
+          },
+          {
+            "value": "background-color__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "background-color__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "background-color__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "background-color__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "background-color__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "background-color__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button Style",
+        "options": [
+          {
+            "value": "button__button-color",
+            "label": "Classic"
+          },
+          {
+            "value": "button__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "button__transparent-white",
+            "label": "Transparent with White Border"
+          },
+          {
+            "value": "button__transparent-black",
+            "label": "Transparent with Black Border"
+          },
+          {
+            "value": "button__white",
+            "label": "White"
+          },
+          {
+            "value": "button__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "button__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "button__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "button__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "button__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "button__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Content Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon Image"
+          },
+          {
+            "type": "text",
+            "id": "icon_svg",
+            "label": "Icon SVG",
+            "info": "Enter filename without extension. Will override images."
+          },
+          {
+            "type": "richtext",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "caption",
+            "label": "Caption"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

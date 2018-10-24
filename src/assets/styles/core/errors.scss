@@ -1,0 +1,29 @@
+.errors {
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      margin-bottom: $quarter-gap;
+    }
+  }
+  font-size: 1.4rem;
+}
+
+.register__password-error {
+  margin-top: $quarter-gap;
+}
+
+.errors ul li, 
+.register__password-error span {
+  &:before {
+    content: '!';
+    font-size: 14px;
+    width: 12px;
+    height: 12px;
+    color: #FFF;
+    margin-right: 1rem;
+    line-height: 1;
+    padding: 0px 8px;
+    background-color: $button-color;
+  }
+}

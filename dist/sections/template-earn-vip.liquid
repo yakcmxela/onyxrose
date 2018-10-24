@@ -1,0 +1,112 @@
+<section data-section-type="vip-points" data-section-id="{{ section.id }}" class="vip-points">
+	{% if section.settings.heading != blank %}
+		{% assign wayfinder_selection = page.metafields.custom_fields["color_wayfinding_gen"] %}
+    {% include 'color-wayfinder-case' %}
+    <h2 class="wayfinder__level {{ wayfinder }}"><span>{{ section.settings.heading }}</span></h2>
+	{% endif %}
+	{% if section.settings.subheading != blank %}
+		<div class="rte__small">
+			<p>{{ section.settings.subheading }}</p>
+		</div>
+	{% endif %}
+	<div class="vip-points__row flex-columns-3">
+		<div class="flex-columns__item vip-points__item">
+			{% include 'icon-bronze_leaf' %}
+			{% if section.settings.bronze_title != blank %}
+				<h3 class="vip-points__title"><span>Balanced Life</span><span>{{ section.settings.bronze_title }}</span></h3>
+			{% endif %}
+			{% if section.settings.bronze_point_value != blank %}
+				<p class="vip-points__value">{{ section.settings.bronze_point_value }}</p>
+			{% endif %}
+			{% if section.settings.bronze_point_label != blank %}
+				<p class="vip-points__label">{{ section.settings.bronze_point_label }}</p>
+			{% endif %}
+		</div>
+		<div class="flex-columns__item vip-points__item">
+			{% include 'icon-silver_leaf' %}
+			{% if section.settings.silver_title != blank %}
+				<h3 class="vip-points__title"><span>Balanced Life</span><span>{{ section.settings.silver_title }}</span></h3>
+			{% endif %}
+			{% if section.settings.silver_point_value != blank %}
+				<p class="vip-points__value">{{ section.settings.silver_point_value }}</p>
+			{% endif %}
+			{% if section.settings.silver_point_label != blank %}
+				<p class="vip-points__label">{{ section.settings.silver_point_label }}</p>
+			{% endif %}
+		</div>
+		<div class="flex-columns__item vip-points__item">
+			{% include 'icon-gold_leaf' %}
+			{% if section.settings.gold_title != blank %}
+				<h3 class="vip-points__title"><span>Balanced Life</span><span>{{ section.settings.gold_title }}</span></h3>
+			{% endif %}
+			{% if section.settings.gold_point_value != blank %}
+				<p class="vip-points__value">{{ section.settings.gold_point_value }}</p>
+			{% endif %}
+			{% if section.settings.gold_point_label != blank %}
+				<p class="vip-points__label">{{ section.settings.gold_point_label }}</p>
+			{% endif %}
+		</div>
+	</div>
+</section>
+{% schema %}
+	{
+		"name": "VIP Points Table",
+		"settings": [
+			{
+				"type": "text",
+				"id": "heading",
+				"label": "Section Heading"
+			},
+			{
+				"type": "richtext",
+				"id": "subheading",
+				"label": "Section subheading"
+			},
+			{
+				"type": "text",
+				"id": "bronze_title",
+				"label": "Bronze Title"
+			},
+			{
+				"type": "text",
+				"id": "bronze_point_value",
+				"label": "Bronze Point Value"
+			},
+			{
+				"type": "text",
+				"id": "bronze_point_label",
+				"label": "Bronze Point Label"
+			},
+			{
+				"type": "text",
+				"id": "silver_title",
+				"label": "Silver Title"
+			},
+			{
+				"type": "text",
+				"id": "silver_point_value",
+				"label": "Silver Point Value"
+			},
+			{
+				"type": "text",
+				"id": "silver_point_label",
+				"label": "Silver Point Label"
+			},
+			{
+				"type": "text",
+				"id": "gold_title",
+				"label": "Gold Title"
+			},
+			{
+				"type": "text",
+				"id": "gold_point_value",
+				"label": "Gold Point Value"
+			},
+			{
+				"type": "text",
+				"id": "gold_point_label",
+				"label": "Gold Point Label"
+			}
+		]
+	}
+{% endschema %}

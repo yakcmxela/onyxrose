@@ -1,0 +1,171 @@
+.flex-container__row {
+  @-webkit-keyframes rotate {
+      0% {
+          -webkit-transform: rotate(0);
+          transform: rotate(0)
+      }
+
+      100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg)
+      }
+  }
+
+  @keyframes rotate {
+      0% {
+          -webkit-transform: rotate(0);
+          transform: rotate(0)
+      }
+
+      100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg)
+      }
+  }
+
+  .checkout-logo {
+    margin-bottom: $half-gap;
+    svg {
+      width: 256px;
+      height: 40px;
+      .amp {
+        fill: #c64a6e;
+      }
+    }
+  }
+
+  .page-width {
+    width: 62%;
+    padding-left: 5%;
+    padding-right: 6%;
+    padding-top: 4rem;
+    @media(max-width: $phablet) {
+      width: 100%;
+    }
+  }
+
+
+  .form-control {
+    border: 1px transparent solid;
+    background-clip: padding-box;
+    border-radius: 5px;
+    display: block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.92857em 0.78571em;
+    word-break: normal;
+  }
+  
+
+  .hidden {
+    display: none;
+  }
+
+  .payment-method-wrapper {
+    background: #fff;
+    background-clip: padding-box;
+    border: 0px #d9d9d9 solid;
+    border-radius: 5px;
+    color: #545454;
+  }
+
+  .payment-method-container ~ .payment-method-container {
+   border-top: 0px solid #d9d9d9;
+  }
+
+  .payment-method-container label {
+    display: table;
+    padding: 16px 0px;
+    position: relative;
+    width: 100%;
+    zoom: 1;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+
+  .payment-method-radio {
+    display: table-cell;
+    padding-right: 10px;
+    white-space: nowrap;
+
+    input {
+    	cursor: pointer;
+    }
+
+    .btn__spinner {
+      display: none;
+      -webkit-animation: fade-in 0.5s ease-in-out, rotate 0.5s linear infinite;
+      animation: fade-in 0.5s ease-in-out, rotate 0.5s linear infinite;
+      fill: $button-color;
+      height: 14px;
+      width: 14px;
+      vertical-align: middle;
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .payment-method-label {
+    display: table-cell;
+    white-space: nowrap;
+    width: 100%;
+    line-height: 20px;
+  }
+
+  .payment-method-image {
+    display: table-cell;
+    white-space: nowrap;
+
+    img {
+      height: 20px;
+      max-width: 50px;
+      vertical-align: middle
+    }
+  }
+
+  .payment-form {
+    padding: 4rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    
+    &.hidden {
+  	display: block;
+  	position: absolute;
+  	left: -10000px;
+    }
+  }
+
+  .action-wrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cancel-link {
+    svg {
+      width: 10px;
+      height: 10px;
+      fill: currentColor;
+    }
+  }
+
+  .confirm-btn {
+    float: right;
+  }
+
+  .payment-method-container.loading {
+    .payment-method-radio input {
+      display: none;
+    }
+    
+    .payment-method-radio .btn__spinner {
+      display: block;
+    }
+  }
+
+  .single-payment-method .payment-method-radio {
+  	display: none;
+  }
+}

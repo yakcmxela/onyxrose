@@ -1,0 +1,61 @@
+<style>
+  {{ settings.font_heading | font_face }}
+  {{ settings.font_body | font_face }}
+
+  {%- assign font_body_bold = settings.font_body | font_modify: 'weight', '700' -%}
+  {%- assign font_body_regular = settings.font_body | font_modify: 'weight', '400' -%}
+  {%- assign font_heading_bold = settings.font_heading | font_modify: 'weight', '700' -%}
+  {%- assign font_heading_semibold = settings.font_heading | font_modify: 'weight', '600' -%}
+  {%- assign font_heading_regular = settings.font_heading | font_modify: 'weight', '400' -%}
+  {%- assign font_heading_light = settings.font_heading | font_modify: 'weight', '300' -%}
+  {%- assign font_body_bold_italic = font_body_bold | font_modify: 'style', 'italic' -%}
+  
+  {{ font_body_bold | font_face }}
+  {{ font_body_regular | font_face }}
+  {{ font_heading_bold | font_face }}
+  {{ font_heading_semibold | font_face }}
+  {{ font_heading_regular | font_face }}
+  {{ font_heading_light | font_face }}
+  {{ font_body_bold_italic | font_face }}
+
+  :root {
+
+    --button-color: {{ settings.button_color }};
+    --brand-green: {{ settings.brand_green }};
+    --brand-yellow: {{ settings.brand_yellow }};
+    --brand-pink: {{ settings.brand_pink }};
+    --brand-purple-dk: {{ settings.brand_purple_dark }};
+    --brand-purple-md: {{ settings.brand_purple_mid }};
+    --brand-purple-lt: {{ settings.brand_purple_light }};
+    --brand-grey-dk: {{ settings.dark_grey }};
+    --brand-grey-md: {{ settings.mid_grey }};
+    --brand-grey-lt: {{ settings.light_grey }};
+    --brand-black: {{ settings.brand_black }};
+    --brand-white: {{ settings.brand_white }};
+
+    --button-hover: {{ settings.button_color | color_modify: 'alpha', 0.35 }};
+    --brand-green-hover: {{ settings.brand_green | color_modify: 'alpha', 0.35 }};
+    --brand-yellow-hover: {{ settings.brand_yellow | color_modify: 'alpha', 0.35 }};
+    --brand-pink-hover: {{ settings.brand_pink | color_modify: 'alpha', 0.35 }};
+    --brand-purple-dk-hover: {{ settings.brand_purple_dark | color_modify: 'alpha', 0.35 }};
+    --brand-purple-md-hover: {{ settings.brand_purple_mid | color_modify: 'alpha', 0.35 }};
+    --brand-purple-lt-hover: {{ settings.brand_purple_light | color_modify: 'alpha', 0.35 }};
+    --brand-grey-dk-hover: {{ settings.dark_grey | color_modify: 'alpha', 0.35 }};
+    --brand-grey-md-hover: {{ settings.mid_grey | color_modify: 'alpha', 0.35 }};
+    --brand-grey-lt-hover: {{ settings.light_grey | color_modify: 'alpha', 0.35 }};
+    --brand-black-hover: {{ settings.brand_black | color_modify: 'alpha', 0.35 }};
+    --brand-white-hover: {{ settings.brand_white | color_modify: 'alpha', 0.35 }};
+
+    --color-main-background: {{ settings.color_main_bg }};
+
+    --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+    --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+    --font-callout: {{ settings.font_callout.family }}, {{ settings.font_callout.fallback_families }};
+    --font-heading-bold-weight: {{ font_heading_bold.weight | default: '700' }};
+    --font-heading-semibold-weight: {{ font_heading_semibold.weight | default: '600' }};
+    --font-heading-regular-weight: {{ font_heading_regular.weight | default: '400' }};
+    --font-heading-light-weight: {{ font_heading_light.weight | default: '300' }};
+    --font-body-bold-weight: {{ font_body_bold.weight | default: 'bold' }};
+    --font-body-regular-weight: {{ font_body_regular.weight | default: '400' }};
+  }
+</style>

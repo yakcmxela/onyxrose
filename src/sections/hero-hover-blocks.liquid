@@ -1,0 +1,114 @@
+<section class="hero-blocks" data-section-type="hero-hover-blocks" data-section-id="{{ section.id }}">
+  {% if section.settings.heading != blank %}
+    <h2 class="text__wayfinder wayfinder__button-color wayfinder__raised"><span>{{ section.settings.heading }}</span></h2>
+  {% endif %}
+  {% assign iterator = 0 %}
+  {% for block in section.blocks %}
+    {% assign iterator = iterator | plus: 1 %}
+  {% endfor %}
+  <div class="hero-blocks__blocks {{ section.settings.text_color }} hero-blocks__blocks-{{ iterator }}" style="background-image: url({{ section.settings.hero_image | img_url: 'master' }}); height: {{ section.settings.height }}vh;">
+    {% for block in section.blocks %}
+      {% assign page = pages[section.settings.page] %}
+      <div class="hero-blocks__block">
+        <div class="hero-blocks__block-content">
+          <div class="shop__icon-plus"><span></span></div>
+          <h3>{{ block.settings.caption | strip_html }}</h3>
+          <h4>{{ block.settings.reveal | strip_html }}</h4>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Hero with Hover Blocks",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "label": "Text Color",
+        "options": [
+          {
+            "value": "text-color__button-color",
+            "label": "Button Color"
+          },
+          {
+            "value": "text-color__brand-black",
+            "label": "Black"
+          },
+          {
+            "value": "text-color__brand-white",
+            "label": "White"
+          },
+          {
+            "value": "text-color__brand-purple-dark",
+            "label": "Purple Dark"
+          },
+          {
+            "value": "text-color__brand-purple-mid",
+            "label": "Purple Mid"
+          },
+          {
+            "value": "text-color__brand-purple-light",
+            "label": "Purple Light"
+          },
+          {
+            "value": "text-color__brand-green",
+            "label": "Green"
+          },
+          {
+            "value": "text-color__brand-yellow",
+            "label": "Yellow"
+          },
+          {
+            "value": "text-color__brand-pink",
+            "label": "Pink"
+          }
+        ]
+      },
+      {
+      	"type": "range",
+      	"id": "height",
+      	"label": "Vertical Height",
+      	"default": 72,
+      	"min": 0,
+      	"max": 100
+      }
+    ],
+    "blocks": [
+      {
+        "type": "hover",
+        "name": "Hover Block",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "caption",
+            "label": "Caption"
+          },
+          {
+            "type": "richtext",
+            "id": "reveal",
+            "label": "Reveal Text"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero with Hover Blocks",
+        "category": "Feature"
+      }
+    ]
+  }
+{% endschema %}

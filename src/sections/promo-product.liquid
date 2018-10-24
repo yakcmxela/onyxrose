@@ -1,0 +1,209 @@
+<section class="promo-product" data-section-type="promo-product" data-section-id="{{ section.id }}">
+  {% if section.settings.heading != blank %}
+    <h2>{{ section.settings.heading }}</h2>
+  {% endif %}
+  <div class="promo-product__blocks">
+    {% for block in section.blocks %}
+      {% if block.type == 'promo' %}
+        <div class="promo-product__promo {{ block.settings.text_color }}" style="background-image: url({{ block.settings.image | img_url: '1200x' }});">
+          <div class="flex-container flex-container__{{ block.settings.vertical_alignment }}--{{ block.settings.horizontal_alignment }}">
+            {% if block.settings.caption != blank %}
+              <h3>{{ block.settings.caption | replace: '<p>', '<br>' | replace: '</p>', '' }}</h3>
+            {% endif %}
+            {% assign page = pages[block.settings.button_link] %}
+            {% if block.settings.button_text %}
+              {% assign button_text = block.settings.button_text %}
+            {% else %}
+              {% assign button_text = page.title %}
+            {% endif %}
+            <a class="button {{ block.settings.button_style }}" href="{{ block.settings.button_link }}" title="{{ page.title }}">{{ button_text }}</a>
+          </div>
+        </div>
+      {% else %}
+        <div class="promo-product__product">
+          {%- assign product = all_products[block.settings.product] -%}
+          {% include 'product-overview' %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Promo with Product",
+    "max_blocks": 2,
+    "blocks": [
+      {
+        "type": "promo",
+        "name": "Promo",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "caption",
+            "label": "Caption"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "select",
+            "id": "vertical_alignment",
+            "label": "Vertical Alignment",
+            "options": [
+              {
+                "value": "start",
+                "label": "Start"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "end",
+                "label": "End"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "horizontal_alignment",
+            "label": "Horizontal Alignment",
+            "options": [
+           {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "center",
+                "label": "Center"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+             ]
+          },
+          {
+            "type": "select",
+            "id": "text_color",
+            "label": "Text Color",
+            "options": [
+              {
+                "value": "text-color__button-color",
+                "label": "Button Color"
+              },
+              {
+                "value": "text-color__brand-black",
+                "label": "Black"
+              },
+              {
+                "value": "text-color__brand-white",
+                "label": "White"
+              },
+              {
+                "value": "text-color__brand-purple-dark",
+                "label": "Purple Dark"
+              },
+              {
+                "value": "button__brand-purple-mid",
+                "label": "Purple Mid"
+              },
+              {
+                "value": "text-color__brand-purple-light",
+                "label": "Purple Light"
+              },
+              {
+                "value": "text-color__brand-green",
+                "label": "Green"
+              },
+              {
+                "value": "text-color__brand-yellow",
+                "label": "Yellow"
+              },
+              {
+                "value": "text-color__brand-pink",
+                "label": "Pink"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+          "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "options": [
+              {
+                "value": "button__button-color",
+                "label": "Classic"
+              },
+              {
+                "value": "button__brand-black",
+                "label": "Black"
+              },
+              {
+                "value": "button__transparent-white",
+                "label": "Transparent with White Border"
+              },
+              {
+                "value": "button__transparent-black",
+                "label": "Transparent with Black Border"
+              },
+              {
+                "value": "button__white",
+                "label": "White"
+              },
+              {
+                "value": "button__brand-purple-dark",
+                "label": "Purple Dark"
+              },
+              {
+                "value": "button__brand-purple-light",
+                "label": "Purple Light"
+              },
+              {
+                "value": "button__brand-green",
+                "label": "Green"
+              },
+              {
+                "value": "button__brand-yellow",
+                "label": "Yellow"
+              },
+              {
+                "value": "button__brand-pink",
+                "label": "Pink"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Promo with Product",
+        "category": "Feature"
+      }
+    ]
+  }
+{% endschema %}

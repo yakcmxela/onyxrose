@@ -1,0 +1,29 @@
+.promo-product {
+
+}
+
+.promo-product__blocks {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	justify-items: stretch;
+	grid-gap: $half-gap;
+	@include media-query($small) {
+		display: block;
+		h3 {
+			text-align: center;
+		}
+	}
+}
+
+.promo-product__promo {
+	padding: $gap;
+	background-size: cover;
+	background-position: center center;
+	-ms-grid-column: 1;
+}
+
+.promo-product__product {
+	padding-left: $half-gap;
+	-ms-grid-column: 2;
+	text-align: center;
+}

@@ -1,0 +1,130 @@
+.single-image-text {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	z-index: 2;
+  margin: $gap 0;
+ 	&:after {
+ 		content: '';
+ 		width: 66%;
+ 		height: 100%;
+ 		background-color: $brand-grey-lt;
+ 		position: absolute;
+ 		left: 0;
+ 		top: 50%;
+ 		transform: translateY(-50%);
+ 		z-index: -1;
+ 	}
+  .button {
+    position: relative;
+    z-index: 2;
+  }
+  &.row-reverse {
+    flex-direction: row-reverse;
+    &:after {
+      left: initial;
+      right: 0;
+    }
+    .single-image-text__content {
+      padding: $gap calc(#{$gap} * 2) $gap 0;
+    }
+  }
+  @include media-query($medium-down) {
+    flex-direction: column !important;
+    padding: 0;
+    margin: $quarter-gap 0;
+    h2 {
+      align-self: center;
+      white-space: initial;
+    }
+    &:after {
+    	width: 100%;
+    	transform: translateY(0px);
+    	top: 0;
+    	height: 90%;
+    }
+    .single-image-text__content,
+    .single-image-text__image {
+      width: 100%;
+    }
+    &.row-reverse .single-image-text__content,
+    .single-image-text__content {
+    	padding: $gap;
+    	margin: 0;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .single-image-text__image {
+      img {
+      	//width: 100%;
+      }
+    }
+  }
+}
+
+.single-image-text__content {
+	width: 40%;
+	padding: $gap 0 $gap calc(#{$gap} * 2);
+	margin: $gap 0;
+	h2 {
+  	text-transform: uppercase;
+    padding: 4px 0;
+    letter-spacing: 3px;
+    font-size: 2rem;
+    font-weight: 800;
+    border-top: 2px solid $brand-black;
+    border-bottom: 2px solid $brand-black;
+    white-space: wrap;
+    line-height: 1.25;
+    padding: $quarter-gap 0;
+    text-align: center;
+  }
+  h3 {
+    font-weight: $font-heading-bold;
+    letter-spacing: -0.4px;
+    font-size: 2.5rem;
+  }
+  p {
+    font-size: 1.6rem;
+    line-height: 1.8;
+  }
+  h2, h3, p {
+  	margin: $quarter-gap 0;
+    max-width: 100%;
+  }
+  @media(max-width: $phablet) {
+    text-align: center;
+  }
+}
+
+.single-image-text__icon {
+	margin-bottom: $half-gap;
+	height: 84px;
+}
+
+.single-image-text__image {
+	width: 55%;
+  text-align: center;
+  padding: $gap 0;
+	img {
+    max-height: 80vh;
+    //width: 100%;
+		box-shadow: 0 3px 19px 0 rgba(0, 0, 0, 0.34);
+	}
+}
+
+.single-image-text__accent-image {
+	img {
+		position: absolute;
+		bottom: 0%;
+		transform: translateY($gap);
+		left: -#{$gap};
+		z-index: 1;
+	}
+}
+
+.has_accent {
+	margin-bottom: calc(#{$gap} * 2);
+}

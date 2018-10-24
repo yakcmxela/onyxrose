@@ -1,0 +1,91 @@
+.background-color__button-color {
+  color: $brand-black;
+  background-color: $button-color;
+  svg {
+  	path { 
+  		stroke: $brand-black;
+  	}
+  }
+}
+.background-color__brand-black {
+  color: $brand-white;
+  background-color: $brand-black;
+  svg {
+  	path { 
+  		stroke: $brand-white
+  	}
+  }
+}
+.background-color__brand-white {
+  color: $brand-black;
+  background-color: $brand-white;
+  svg {
+  	path { 
+  		stroke: $brand-black
+  	}
+  }
+}
+.background-color__brand-purple-dark {
+  color: $brand-white;
+  background-color: $brand-purple-dk;
+  svg {
+  	path { 
+  		stroke: $brand-white;
+  	}
+  }
+}
+.background-color__brand-purple-mid {
+  color: $brand-white;
+  background-color: $brand-purple-md;
+  svg {
+    path { 
+      stroke: $brand-white;
+    }
+  }
+  .section-heading__level-centered,
+  .section-heading__level,
+  .section-heading__raised,
+  .section-heading__lowered {
+    span {
+      &:after {
+        background-color: $brand-purple-dk;
+      }
+    }
+  }
+}
+.background-color__brand-purple-light {
+  color: $brand-black;
+  background-color: $brand-purple-lt;
+  svg {
+  	path { 
+  		stroke: $brand-black; 
+  	}
+  }
+}
+.background-color__brand-green {
+  color: $brand-black;
+  background-color: $brand-green;
+  svg {
+  	path { 
+  		stroke: $brand-black;
+  	}
+  }
+}
+.background-color__brand-yellow {
+  color: $brand-black;
+  background-color: $brand-yellow;
+  svg {
+    path { 
+      stroke: $brand-black;
+    }
+  }
+}
+.background-color__brand-pink {
+  color: $brand-black;
+  background-color: $brand-pink;
+  svg {
+  	path { 
+  		stroke: $brand-black  	
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.scroll-anchor {
+	position: relative;
+}
+.scroll-anchor__anchor {
+	width: calc(#{$gap} * 1.5);
+	height: calc(#{$gap} * 1.5);
+	border-radius: 100%;
+	background-color: $brand-black;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+	i {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		color: $brand-white;
+		font-size: 2rem;
+		transition: all .15s linear;
+	}
+	&:hover {
+		cursor: pointer;
+		i {
+			color: $button-color;
+		}
+	}
+}

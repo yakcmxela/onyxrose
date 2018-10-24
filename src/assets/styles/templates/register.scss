@@ -1,0 +1,35 @@
+.template-register {
+	h1 {
+		text-align: center;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	    justify-content: center;
+	    input {
+	    	min-width: 350px;
+	    }
+	    .button {
+	    	min-width: 200px;
+	    	margin: 0;
+	    }
+	    a {
+	    	display: block;
+	    	margin: .5rem 0;
+	    }
+	}
+	#FirstName {
+		margin-top: $half-gap;
+	}
+	#FirstName,
+	#LastName,
+	#Email,
+	#CreatePassword {
+		width: 200px;
+		margin-bottom: $quarter-gap;
+	}
+	#CheckPassword {
+		margin-bottom: $half-gap;
+	}
+}

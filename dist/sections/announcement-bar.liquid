@@ -1,0 +1,50 @@
+<section class="announcement-bar" data-section-type="announcement-bar" data-section-id="{{ section.id }}">
+	{% if section.settings.title != blank %}
+		<span class="announcement-bar__title">{{ section.settings.title }}</span>
+	{% endif %}
+	{% if section.settings.description != blank %}
+		<span class="announcement-bar__description">{{ section.settings.description }}</span>
+	{% endif %}
+	{% if section.settings.link_to != blank %}
+		{% if section.settings.link_text != blank %}
+			{% assign link_text = section.settings.link_text %}
+		{% else %}
+			{% assign link_text = "Learn More" %}
+		{% endif %}
+		<a class="announcement-bar__link" href="{{ section.settings.link_to }}">{{ link_text }}</a>
+		<a class="announcement-bar__arrow" href="{{ section.settings.link_to }}">&xrarr;</a>
+	{% endif %}
+</section> 
+{% schema %}
+	{
+		"name": "Announcement Bar",
+		"settings": [
+			{
+				"type": "richtext",
+				"id": "title",
+				"label": "Title"
+			},
+			{
+				"type": "richtext",
+				"id": "description",
+				"label": "Description"
+			},
+			{
+				"type": "url",
+				"id": "link_to",
+				"label": "Link To"
+			},
+			{
+				"type": "text",
+				"id": "link_text",
+				"label": "Link Text"
+			}
+		],
+		"presets": [
+			{
+				"name": "Announcement Bar",
+				"category": "Features"
+			}
+		]
+	}
+{% endschema %}
